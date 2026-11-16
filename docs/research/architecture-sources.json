@@ -1,0 +1,193 @@
+{
+  "document": "../technical-architecture.md",
+  "checked_on": "2026-10-30",
+  "status": "architecture_proposal",
+  "method": "Primary official documentation checked through web retrieval; existing project research used for previously assessed identity, detector and LiteLLM source boundaries.",
+  "not_performed": [
+    "Dependency installation",
+    "Gateway or database deployment",
+    "Live model invocation",
+    "Concurrency or load testing",
+    "Failure injection",
+    "Production recovery validation"
+  ],
+  "sources": [
+    {
+      "topic": "Rust HTTP stack",
+      "url": "https://docs.rs/axum/latest/axum/",
+      "use": "Tokio/Hyper/Tower integration"
+    },
+    {
+      "topic": "Middleware",
+      "url": "https://docs.rs/tower/latest/tower/",
+      "use": "Service/Layer primitives; not a proof of distributed quota consistency"
+    },
+    {
+      "topic": "SQL access",
+      "url": "https://docs.rs/sqlx/latest/sqlx/",
+      "use": "Async access, connection pools, transactions and migrations"
+    },
+    {
+      "topic": "Frontend",
+      "url": "https://react.dev/learn/creating-a-react-app",
+      "use": "Application construction options; SPA selection is a project recommendation"
+    },
+    {
+      "topic": "Frontend build",
+      "url": "https://vite.dev/guide/",
+      "use": "React TypeScript application tooling"
+    },
+    {
+      "topic": "UI components",
+      "url": "https://ant.design/docs/react/introduce",
+      "use": "React enterprise component library candidate"
+    },
+    {
+      "topic": "Frontend server state",
+      "url": "https://tanstack.com/query/latest/docs/framework/react/overview",
+      "use": "Fetching and caching; not authoritative financial state"
+    },
+    {
+      "topic": "LiteLLM reuse",
+      "url": "https://docs.litellm.ai/docs/litellm_core",
+      "use": "Core SDK boundaries and distribution overlap"
+    },
+    {
+      "topic": "Python streaming",
+      "url": "https://fastapi.tiangolo.com/advanced/custom-response/",
+      "use": "StreamingResponse and cancellation constraints"
+    },
+    {
+      "topic": "Auxiliary storage",
+      "url": "https://valkey.io/topics/replication/",
+      "use": "Replication acknowledgements do not establish CP semantics"
+    },
+    {
+      "topic": "Database concurrency",
+      "url": "https://www.postgresql.org/docs/current/transaction-iso.html",
+      "use": "Isolation, locking and retry requirements"
+    },
+    {
+      "topic": "Worker queue",
+      "url": "https://www.postgresql.org/docs/current/sql-select.html",
+      "use": "SKIP LOCKED is suitable for queue-like work, not arbitrary consistency checks"
+    },
+    {
+      "topic": "Durability",
+      "url": "https://www.postgresql.org/docs/current/wal-async-commit.html",
+      "use": "Asynchronous commit can lose acknowledged transactions"
+    },
+    {
+      "topic": "High availability",
+      "url": "https://www.postgresql.org/docs/current/warm-standby.html",
+      "use": "Asynchronous replication default and synchronous replication tradeoffs"
+    },
+    {
+      "topic": "Data isolation",
+      "url": "https://www.postgresql.org/docs/current/ddl-rowsecurity.html",
+      "use": "Owner, superuser and BYPASSRLS boundaries"
+    },
+    {
+      "topic": "Adapter lifecycle",
+      "url": "https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/",
+      "use": "Native sidecar shutdown ordering"
+    },
+    {
+      "topic": "Deployment lifecycle",
+      "url": "https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/",
+      "use": "Graceful termination, readiness and ordinary container ordering"
+    },
+    {
+      "topic": "Parquet format",
+      "url": "https://parquet.apache.org/docs/file-format/",
+      "use": "File metadata follows data; used to motivate completed-batch sealing, not a runtime benchmark"
+    },
+    {
+      "topic": "Parquet overview",
+      "url": "https://parquet.apache.org/docs/overview/",
+      "use": "Columnar format, batch encoding and Rust implementation listed by Apache"
+    },
+    {
+      "topic": "Rust code organization",
+      "url": "https://doc.rust-lang.org/cargo/reference/workspaces.html",
+      "use": "Workspace members, shared Cargo.lock and centralized dependency configuration; project module boundaries remain a ZenRouter engineering decision."
+    }
+  ],
+  "prior_local_evidence": [
+    "../governance-research.md",
+    "../litellm-reuse-research.md",
+    "governance-sources.json"
+  ],
+  "unavailable_not_relied_on": [
+    {
+      "url": "https://www.starlette.io/responses/",
+      "result": "HTTP 502 during retrieval"
+    },
+    {
+      "url": "https://www.uvicorn.org/server-behavior/",
+      "result": "Retrieval timeout"
+    },
+    {
+      "url": "https://www.uvicorn.org/",
+      "result": "Retrieval timeout"
+    },
+    {
+      "url": "https://www.postgresql.org/docs/current/backup-pitr-recovery.html",
+      "result": "HTTP 404; not a verified documentation path"
+    }
+  ],
+  "limitations": [
+    "Current/latest documentation URLs are not reproducible dependency pins.",
+    "The file backend, JSONL/Parquet strategy, UI choices and deployment units are engineering recommendations, not claims that upstream projects implement the complete product.",
+    "Version locks, license inventory and capacity targets must be established during the next validation phase."
+  ],
+  "architecture_version": "0.4",
+  "product_requirement_update": {
+    "on": "2026-10-30",
+    "source": "User clarification in this conversation",
+    "decisions": [
+      "Enterprises may prohibit, limit, redact or fully retain request/response bodies.",
+      "Retention scope and approved internal/external storage location are independent policies.",
+      "Apply content policy before any durable body write; temporary journals, caches, logs and backups obey the same constraints."
+    ],
+    "not_a_runtime_validation": true
+  },
+  "initial_storage_scope_update": {
+    "on": "2026-10-30",
+    "source": "User clarification in this conversation",
+    "requested_scope": "Use file storage or Parquet for original data initially; extend storage types later.",
+    "engineering_proposal": "File backend with JSONL live segments and optional Parquet batch sealing; PostgreSQL keeps metadata and file references.",
+    "not_performed": [
+      "File writer implementation",
+      "Parquet round-trip tests",
+      "Filesystem crash recovery",
+      "Multi-node storage validation"
+    ]
+  },
+  "deployment_scope_update": {
+    "on": "2026-10-30",
+    "source": "User request to research New API deployment options and reflect them in the technical architecture",
+    "requested_modes": [
+      "local development",
+      "Docker single application container",
+      "Docker Compose",
+      "cluster"
+    ],
+    "evidence_manifest": "deployment-sources.json",
+    "status": "Planned; no deployment assets in this repository",
+    "recommendation": "Common runtime roles and image; Compose default; single application container uses external PostgreSQL; cluster body files require approved shared persistence."
+  },
+  "code_organization_baseline": {
+    "on": "2026-10-30",
+    "status": "Decided as the code organization baseline; not implemented in this repository",
+    "source": "User asked whether the code organization paradigm can now be settled",
+    "decisions": [
+      "Single repository containing Rust, Python, frontend, API contracts and deployment assets",
+      "Cargo workspace with four business domains and a common application-use-case layer",
+      "Entry points depend on use cases; storage and external connectors implement application-owned ports; runtime wires implementations",
+      "Rust roles may be combined or independently run; Python adapter remains a separate process",
+      "Dependency versions are to be locked at scaffold time; business APIs, real provider compatibility and production performance remain subject to validation"
+    ]
+  },
+  "not_performed_scope": "Original architecture research only."
+}

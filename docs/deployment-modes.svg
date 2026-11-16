@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="940" viewBox="0 0 1280 940" role="img" aria-labelledby="title desc">
+  <title id="title">ZenRouter 四种部署方式 · 技术架构 v0.4</title>
+  <desc id="desc">交付规划而非已实现状态。本地开发运行前端、Rust 与 Python；Docker 单应用容器包含静态前端和 Rust、Python 进程并连接外部 PostgreSQL；Compose 编排应用、数据库和可选 Valkey；集群通过负载均衡扩展网关与适配器，使用共享权威状态及获准正文目录。四种方式共享业务、配置和数据契约。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#708c80"/></marker>
+    <style>
+      text{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#213b30}
+      .title{font-size:29px;font-weight:700}.subtitle{font-size:16px;fill:#62746b}
+      .card{fill:#fff;stroke:#d2dfd5;stroke-width:1.5}.eyebrow{font-size:13px;fill:#477b63;font-weight:700;letter-spacing:1px}
+      .heading{font-size:23px;font-weight:700}.note{font-size:16px;fill:#61746a}
+      .node{fill:#f3f7f2;stroke:#cbdccf;stroke-width:1.2}.active{fill:#e5f1e8;stroke:#82ac94;stroke-width:1.2}
+      .node-title{font-size:18px;font-weight:600}.small{font-size:14px;fill:#5c7366}
+      .edge{fill:none;stroke:#708c80;stroke-width:1.6;marker-end:url(#arrow)}
+      .boundary{fill:#f9fcf8;stroke:#aac5b2;stroke-width:1.2;stroke-dasharray:6 4}
+      .line{stroke:#e1e9e1;stroke-width:1}
+    </style>
+  </defs>
+  <rect width="1280" height="940" fill="#f8faf5"/>
+  <text class="title" x="36" y="48">同一套 ZenRouter，适配四种部署方式</text>
+  <text class="subtitle" x="36" y="80">按角色组合运行 · PostgreSQL 统一权威状态 · JSONL / Parquet 正文文件按企业政策启用</text>
+
+  <rect class="card" x="36" y="112" width="592" height="340" rx="18"/>
+  <text class="eyebrow" x="60" y="143">01 / LOCAL DEVELOPMENT</text>
+  <text class="heading" x="60" y="178">本地开发</text>
+  <text class="note" x="60" y="207">源码热更新，使用模拟或获准的真实上游</text>
+  <rect class="node" x="60" y="232" width="148" height="68" rx="10"/>
+  <text class="node-title" x="78" y="260">React / Vite</text><text class="small" x="78" y="282">前端开发服务</text>
+  <path class="edge" d="M208 266H230"/>
+  <rect class="active" x="236" y="232" width="166" height="68" rx="10"/>
+  <text class="node-title" x="254" y="260">Rust 组合角色</text><text class="small" x="254" y="282">调用 / 管理 / 任务</text>
+  <path class="edge" d="M402 266H424"/>
+  <rect class="node" x="430" y="232" width="174" height="68" rx="10"/>
+  <text class="node-title" x="447" y="260">Python Adapter</text><text class="small" x="447" y="282">独立虚拟环境</text>
+  <path class="edge" d="M319 300V322"/>
+  <rect class="node" x="60" y="328" width="544" height="53" rx="10"/>
+  <text class="node-title" x="78" y="360">PostgreSQL + 按需 Valkey / 开发文件目录</text>
+  <line class="line" x1="60" y1="401" x2="604" y2="401"/>
+  <text class="small" x="60" y="427">统一启动脚本；依赖可由 Compose 提供；不增加 SQLite 分支。</text>
+
+  <rect class="card" x="652" y="112" width="592" height="340" rx="18"/>
+  <text class="eyebrow" x="676" y="143">02 / SINGLE APPLICATION CONTAINER</text>
+  <text class="heading" x="676" y="178">Docker 单应用容器</text>
+  <text class="note" x="676" y="207">适合已有数据库的用户；数据库放在容器之外</text>
+  <rect class="boundary" x="676" y="228" width="544" height="91" rx="10"/>
+  <text class="small" x="692" y="251">一个发行镜像 · 受控启动器管理 Rust 与 Python</text>
+  <rect class="node" x="692" y="264" width="148" height="39" rx="7"/>
+  <text class="node-title" x="708" y="290">前端静态资源</text>
+  <rect class="active" x="856" y="264" width="167" height="39" rx="7"/>
+  <text class="node-title" x="871" y="290">Rust 组合角色</text>
+  <rect class="node" x="1039" y="264" width="165" height="39" rx="7"/>
+  <text class="node-title" x="1053" y="290">Python Adapter</text>
+  <path class="edge" d="M935 319V328H804V333"/>
+  <path class="edge" d="M935 328H1084V333"/>
+  <rect class="node" x="676" y="339" width="256" height="42" rx="9"/>
+  <text class="node-title" x="694" y="367">连接外部 PostgreSQL</text>
+  <rect class="node" x="948" y="339" width="272" height="42" rx="9"/>
+  <text class="node-title" x="966" y="367">正文持久卷 / 按需 Valkey</text>
+  <line class="line" x1="676" y1="401" x2="1220" y2="401"/>
+  <text class="small" x="676" y="427">验证进程失败与停止顺序；不是零外部依赖的一体化数据库镜像。</text>
+
+  <rect class="card" x="36" y="476" width="592" height="340" rx="18"/>
+  <text class="eyebrow" x="60" y="507">03 / DOCKER COMPOSE</text>
+  <text class="heading" x="60" y="542">Docker Compose · 默认安装入口</text>
+  <text class="note" x="60" y="571">同一台主机编排应用和依赖，统一配置与健康检查</text>
+  <rect class="boundary" x="60" y="592" width="544" height="121" rx="10"/>
+  <text class="small" x="76" y="615">同一套应用发行产物；数据库是独立容器</text>
+  <rect class="active" x="76" y="629" width="166" height="64" rx="8"/>
+  <text class="node-title" x="91" y="657">ZenRouter 应用</text><text class="small" x="91" y="678">前端 + Rust + Python</text>
+  <path class="edge" d="M242 661H260"/>
+  <rect class="node" x="266" y="629" width="152" height="64" rx="8"/>
+  <text class="node-title" x="280" y="657">PostgreSQL</text><text class="small" x="280" y="678">独立数据卷</text>
+  <rect class="node" x="434" y="629" width="154" height="64" rx="8"/>
+  <text class="node-title" x="451" y="657">Valkey</text><text class="small" x="451" y="678">按配置启用</text>
+  <text class="note" x="60" y="745">正文另挂持久目录；可覆盖配置连接企业现有依赖</text>
+  <line class="line" x1="60" y1="765" x2="604" y2="765"/>
+  <text class="small" x="60" y="791">适合单机体验与受控生产；单宿主机部署不承诺跨主机高可用。</text>
+
+  <rect class="card" x="652" y="476" width="592" height="340" rx="18"/>
+  <text class="eyebrow" x="676" y="507">04 / CLUSTER</text>
+  <text class="heading" x="676" y="542">集群 · 多主机 Docker / Kubernetes</text>
+  <text class="note" x="676" y="571">网关与适配器成组扩容，管理与任务按需独立运行</text>
+  <rect class="node" x="676" y="592" width="144" height="64" rx="9"/>
+  <text class="node-title" x="694" y="620">负载均衡</text><text class="small" x="694" y="642">就绪检查 / 摘流</text>
+  <path class="edge" d="M820 624H845"/>
+  <rect class="active" x="852" y="592" width="368" height="64" rx="9"/>
+  <text class="node-title" x="871" y="620">[ Rust Gateway + Python Adapter ] × N</text>
+  <text class="small" x="871" y="642">相同业务契约；实例不各自持有完整预算</text>
+  <path class="edge" d="M1046 656V670"/>
+  <rect class="node" x="676" y="676" width="176" height="60" rx="9"/>
+  <text class="node-title" x="690" y="701">Control / Worker</text><text class="small" x="690" y="723">任务协调 / 配置发布</text>
+  <path class="edge" d="M852 706H871"/>
+  <rect class="node" x="878" y="676" width="342" height="60" rx="9"/>
+  <text class="node-title" x="894" y="701">共享 PostgreSQL / 限流状态</text>
+  <text class="small" x="894" y="723">获准共享正文目录 · 每个写入者独立文件</text>
+  <line class="line" x1="676" y1="765" x2="1220" y2="765"/>
+  <text class="small" x="676" y="791">不留正文不要求正文卷；副本数增加不等于数据库或文件高可用。</text>
+
+  <rect x="36" y="844" width="1208" height="58" rx="12" fill="#e6efe4"/>
+  <text class="node-title" x="58" y="880">共同契约：身份与权限、额度账本、客户端协议、留存政策、配置与迁移版本保持一致</text>
+  <text class="small" x="36" y="926">v0.4 · 2026-10-30 · 规划图；安装、镜像构建、多架构、流式排空与跨节点文件恢复均待后续验证。</text>
+</svg>

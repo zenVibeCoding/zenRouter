@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="930" viewBox="0 0 1280 930" role="img" aria-labelledby="diagram-title diagram-desc">
+  <title id="diagram-title">ZenRouter 技术架构建议 v0.4</title>
+  <desc id="diagram-desc">Rust Gateway 与 Python LiteLLM Adapter 成组扩展。PostgreSQL 保存权威业务状态和文件索引。获准正文由网关写入企业文件目录中的 JSONL，Worker 可选批量封存为 Parquet。不留正文时跳过文件写入。多节点文件访问与恢复需验证，S3 等后端后续扩展。</desc>
+  <defs>
+    <marker id="arrow-green" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="#24634c"/></marker>
+    <marker id="arrow-gray" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="#788984"/></marker>
+    <marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="#3c6c8b"/></marker>
+    <style>
+      text{font-family:Inter,-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;fill:#183f34}
+      .title{font-size:25px;font-weight:700}.label{font-size:19px;font-weight:650}.body{font-size:15px;fill:#526b63}.small{font-size:13px;fill:#526b63}.tag{font-size:12px;letter-spacing:1.4px;font-weight:700;fill:#24634c}
+      .box{fill:#fff;stroke:#cddbd3;stroke-width:1.4}.soft{fill:#f5f8f4;stroke:#cddbd3;stroke-width:1.4}
+      .green{fill:#eaf4ed;stroke:#83af94;stroke-width:1.6}.blue{fill:#eff5f8;stroke:#abc4d0;stroke-width:1.5}
+      .flow{fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}.call{stroke:#24634c;marker-end:url(#arrow-green)}.data{stroke:#3c6c8b;marker-end:url(#arrow-blue)}.admin{stroke:#788984;stroke-dasharray:6 5;marker-end:url(#arrow-gray)}
+      .layer{transition:opacity .18s}.dimmed{opacity:.16}
+    </style>
+  </defs>
+  <rect width="1280" height="930" rx="18" fill="#fcfdf9"/>
+  <text x="40" y="44" class="title">ZenRouter / 从调用到治理</text>
+  <text x="40" y="70" class="body">首期正文采用文件后端 · JSONL 写入 / Parquet 可选封存 · 后续再扩展存储类型</text>
+  <g class="layer" data-layer="control">
+    <rect class="box" x="40" y="110" width="250" height="92" rx="12"/>
+    <text class="tag" x="60" y="136">MANAGEMENT</text>
+    <text class="label" x="60" y="162">管理控制台</text>
+    <text class="body" x="60" y="185">React · TypeScript · 静态 SPA</text>
+    <path class="flow admin" d="M165 202 V282"/>
+    <text class="small" x="178" y="243">同源管理 API</text>
+    <rect class="box" x="40" y="284" width="250" height="192" rx="12"/>
+    <text class="tag" x="60" y="313">CONTROL API / RUST</text>
+    <text class="label" x="60" y="344">企业治理与配置管理</text>
+    <text class="body" x="60" y="376">组织 · 授权 · 额度 · 审计</text>
+    <text class="body" x="60" y="404">配置校验 · 发布 · 版本确认</text>
+    <text class="small" x="60" y="451">模块化业务代码，共享领域规则</text>
+    <rect class="box" x="970" y="110" width="270" height="92" rx="12"/>
+    <text class="tag" x="990" y="136">IDENTITY</text>
+    <text class="label" x="990" y="162">企业身份源 / 可选桥接</text>
+    <text class="body" x="990" y="185">OIDC · LDAP · 飞书目录连接器</text>
+    <path class="flow admin" d="M970 156 H938 V227 H310 V320 H290"/>
+    <text class="small" x="350" y="221">标准身份接入；组织角色由平台管理</text>
+  </g>
+  <g class="layer" data-layer="request">
+    <rect class="green" x="340" y="110" width="580" height="92" rx="12"/>
+    <text class="tag" x="360" y="136">CLIENT ENTRY</text>
+    <text class="label" x="360" y="162">企业应用 / 三类客户端协议</text>
+    <text class="body" x="360" y="185">OpenAI Chat + Responses · Anthropic · Gemini</text>
+    <text class="small" x="490" y="251">已有负载均衡 / 入口摘流</text>
+    <rect x="330" y="272" width="600" height="255" rx="16" fill="#f5f9f2" stroke="#83af94" stroke-width="1.5" stroke-dasharray="6 5"/>
+    <rect class="green" x="350" y="303" width="252" height="180" rx="12"/>
+    <text class="tag" x="369" y="330">GATEWAY / RUST</text>
+    <text class="label" x="369" y="362">入口与调用治理</text>
+    <text class="body" x="369" y="393">认证 · 风控 · 额度 · 选路</text>
+    <text class="body" x="369" y="421">尝试管理 · 流式 · 留存政策</text>
+    <text class="small" x="369" y="462">唯一重试决策点</text>
+    <rect class="box" x="642" y="303" width="268" height="180" rx="12"/>
+    <text class="tag" x="661" y="330">ADAPTER / PYTHON</text>
+    <text class="label" x="661" y="362">LiteLLM Core 封装</text>
+    <text class="body" x="661" y="393">单次执行 · 协议转换 · 流式</text>
+    <text class="body" x="661" y="421">原生事件 · 计量 · 终态</text>
+    <text class="small" x="661" y="462">私有接口，不运行另一套治理</text>
+    <path class="flow call" d="M475 202 V300"/>
+    <path class="flow call" d="M602 385 H640"/>
+    <text class="small" x="650" y="511">部署单元 × N · 成组扩容与排空</text>
+    <rect class="box" x="970" y="303" width="270" height="180" rx="12"/>
+    <text class="tag" x="990" y="330">UPSTREAM</text>
+    <text class="label" x="990" y="362">模型供应商 / 自部署</text>
+    <text class="body" x="990" y="393">渠道 A · 渠道 B · 私有模型</text>
+    <text class="body" x="990" y="421">同协议代理 / 已验证的转换</text>
+    <text class="small" x="990" y="462">兼容矩阵明确到协议与功能</text>
+    <path class="flow call" d="M910 385 H967"/>
+    <rect class="soft" x="970" y="513" width="270" height="83" rx="12"/>
+    <text class="label" x="990" y="543">可替换内容检测器</text>
+    <text class="body" x="990" y="570">规则 · Presidio · 企业 DLP</text>
+    <path class="flow call" d="M602 451 H620 V554 H967"/>
+  </g>
+  <g class="layer" data-layer="control data">
+    <path class="flow data" d="M165 476 V609 H400 V672"/>
+    <text class="small" x="54" y="599">权威数据与版本快照</text>
+  </g>
+  <g class="layer" data-layer="request data">
+    <path class="flow data" d="M475 483 V672"/>
+    <text class="small" x="487" y="626">预算 / 元数据</text>
+    <path class="flow data" d="M555 483 V578 H797 V672"/>
+    <text class="small" x="695" y="569">共享限流 / 缓存</text>
+    <path class="flow data" d="M580 483 V603 H1105 V672"/>
+    <text class="small" x="855" y="626">获准正文段 · 写入确认</text>
+  </g>
+  <g class="layer" data-layer="data">
+    <rect class="soft" x="40" y="675" width="250" height="142" rx="12"/>
+    <text class="tag" x="60" y="702">WORKER / RUST</text>
+    <text class="label" x="60" y="731">后台恢复与处理</text>
+    <text class="body" x="60" y="759">归档 · 对账 · 复核 · 汇总</text>
+    <text class="small" x="60" y="792">至少一次执行 + 幂等处理</text>
+    <rect class="blue" x="340" y="675" width="305" height="142" rx="12"/>
+    <text class="tag" x="360" y="702">AUTHORITATIVE STATE</text>
+    <text class="label" x="360" y="731">PostgreSQL</text>
+    <text class="body" x="360" y="759">组织 · 配置 · 账本 · 请求索引</text>
+    <text class="small" x="360" y="792">outbox / 任务 · 正文仅存文件引用</text>
+    <path class="flow data" d="M340 744 H293"/>
+    <rect class="soft" x="680" y="675" width="235" height="142" rx="12"/>
+    <text class="tag" x="700" y="702">SHARED AUXILIARY</text>
+    <text class="label" x="700" y="731">Valkey</text>
+    <text class="body" x="700" y="759">限流 · 可重建热状态</text>
+    <text class="small" x="700" y="792">不作为唯一金额账本</text>
+    <rect class="blue" x="970" y="675" width="270" height="142" rx="12"/>
+    <text class="tag" x="990" y="702">BODY FILES / OPTIONAL</text>
+    <text class="label" x="990" y="731">企业文件存储</text>
+    <text class="body" x="990" y="759">JSONL + 可选 Parquet</text>
+    <text class="small" x="990" y="792">持久卷 / 获准共享目录</text>
+    <path class="flow data" d="M165 817 V855 H1105 V819"/>
+    <text class="small" x="420" y="847">可选批量封存：JSONL → Parquet → 校验发布 → 切换索引后回收旧段</text>
+  </g>
+  <path d="M40 894 H1240" stroke="#dbe5dc"/>
+  <text class="small" x="40" y="917">v0.4 · 2026-10-30 · 逻辑职责可组合或独立部署；正文分支按策略启用，本地单副本不代表多节点高可用。</text>
+</svg>

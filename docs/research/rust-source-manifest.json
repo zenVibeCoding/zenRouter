@@ -1,0 +1,62 @@
+{
+  "checked_on": "2026-10-29",
+  "note": "Branch snapshots; GitHub API rate-limited, commit SHA not captured. File hashes identify local evidence.",
+  "files": [
+    {
+      "repo": "agentgateway/agentgateway",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/agentgateway/agentgateway/main/README.md",
+      "branch": "main",
+      "sha256": "8a7ac2c178edebeae442961d8222acaf3dec9bcc1419cec43059e6c544b45f4d",
+      "bytes": 6443
+    },
+    {
+      "repo": "agentgateway/agentgateway",
+      "path": "Cargo.toml",
+      "url": "https://raw.githubusercontent.com/agentgateway/agentgateway/main/Cargo.toml",
+      "branch": "main",
+      "sha256": "0fc95c8b639d26bb6d33ccc5e589b8e320e478f7f0b17a5328991666fad270ea",
+      "bytes": 11354
+    },
+    {
+      "repo": "agentgateway/agentgateway",
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/agentgateway/agentgateway/main/LICENSE",
+      "branch": "main",
+      "sha256": "3b1ee5b1e14fda40515c18ec2f0796d632e65a20b2aca8f017c654bc26ca77bd",
+      "bytes": 11310
+    },
+    {
+      "repo": "Helicone/ai-gateway",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/Helicone/ai-gateway/main/README.md",
+      "branch": "main",
+      "sha256": "ce052849f7e03294f9678480868b18b2b697128c743fc79dc5ef6cc839df6609",
+      "bytes": 12219
+    },
+    {
+      "repo": "Helicone/ai-gateway",
+      "path": "Cargo.toml",
+      "url": "https://raw.githubusercontent.com/Helicone/ai-gateway/main/Cargo.toml",
+      "branch": "main",
+      "sha256": "4afabc27e9617d9e75107b465221ca77a482bce8a598987aa6287e3fee4658fa",
+      "bytes": 4590
+    },
+    {
+      "repo": "Helicone/ai-gateway",
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/Helicone/ai-gateway/main/LICENSE",
+      "branch": "main",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "bytes": 35149
+    },
+    {
+      "repo": "tensorzero/tensorzero",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/tensorzero/tensorzero/main/README.md",
+      "branch": "main",
+      "sha256": "664c7539d6d11a7dd003d9488b748a4e320a50102cb030107fa97becc87bb7b9",
+      "bytes": 17963
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="description" content="ZenRouter 初版交互原型：功能地图、组织权限、模型路由、安全审计及额度成本。全部为本地示例数据。">
+<title>ZenRouter · 控制台原型</title>
+<link rel="stylesheet" href="prototype.css">
+<script src="prototype.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#content">跳转到正文</a>
+<aside class="sidebar" id="sidebar" aria-label="主导航">
+  <a class="brand" href="#overview"><span class="brand-mark" aria-hidden="true">Z</span><span>ZenRouter<small>ENTERPRISE AI GATEWAY</small></span></a>
+  <div class="workspace"><span class="workspace-icon">Z</span><div>示例企业<small>企业工作空间</small></div><span class="tag neutral">DEMO</span></div>
+  <nav id="navigation" aria-label="功能模块"></nav>
+  <div class="sidebar-bottom"><a href="prototype-plan.md" target="_blank" rel="noopener">功能清单与原型说明 ↗</a><button class="text-button" data-action="reset">重置本地演示</button><div class="profile"><span class="avatar">管</span><div>平台管理员<small>原型角色 · 非真实登录</small></div></div></div>
+</aside>
+<div class="app">
+  <header class="topbar"><div class="crumb"><button class="icon-button mobile-menu" data-action="menu" aria-label="展开或收起导航">☰</button><span>控制台</span><span class="divider">/</span><strong id="breadcrumb">工作总览</strong></div><div class="top-actions"><span class="demo-status"><i></i>交互原型 · 示例数据</span><button class="button small" data-action="help">阅读说明</button></div></header>
+  <main id="content" tabindex="-1"></main>
+  <footer class="app-footer"><span>ZenRouter / 产品原型 v0.1</span><span>数据日期 2026.10.29 · 操作仅影响本地演示</span><a href="governance-research.html">技术调研 ↗</a></footer>
+</div>
+<dialog id="overlay" aria-labelledby="dialog-title"><div id="dialog-content"></div></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<noscript><p class="noscript">请启用 JavaScript 查看交互原型。也可以阅读 <a href="prototype-plan.md">功能模块说明</a>。</p></noscript>
+</body>
+</html>

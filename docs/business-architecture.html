@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="ZenRouter 企业级 AI 路由与治理平台业务架构讨论稿。">
+  <title>业务架构草案 · ZenRouter</title>
+  <style>
+    :root{--paper:#f7f6f2;--white:#fffefa;--ink:#1e302e;--muted:#677672;--line:#dce2dc;--deep:#123d38;--accent:#167c69;--mint:#e9f3ee;--warm:#bd7049;--warm-bg:#f7ede5;--serif:"Songti SC","STSong","Noto Serif CJK SC",serif;--sans:"Avenir Next","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.85 var(--sans);-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}a:hover{color:var(--accent)}button{font:inherit}::selection{background:#b7d9cc;color:var(--deep)}
+    .topline{height:5px;background:linear-gradient(90deg,var(--deep) 0 64%,#a6c3b0 64% 82%,var(--warm) 82%)}
+    .shell{display:grid;grid-template-columns:260px minmax(0,960px);gap:clamp(32px,5vw,88px);max-width:1480px;margin:auto;padding:0 clamp(24px,5vw,80px)}
+    .rail{border-right:1px solid var(--line);padding:39px 26px 60px 0;min-height:100vh}.rail-inner{position:sticky;top:38px}.brand{display:flex;align-items:center;gap:12px;font-size:17px;letter-spacing:-.045em;font-weight:760;color:var(--deep);line-height:1}.mark{width:34px;height:34px;background:var(--deep);color:#f7f6f2;display:grid;place-items:center;font:italic 23px var(--serif);border-radius:4px}.rail-label,.eyebrow,.section-no,.table-label{font-size:10px;letter-spacing:.19em;font-weight:800;text-transform:uppercase}.rail-label{color:#8a9b92;margin:60px 0 12px}.toc{display:grid;gap:3px}.toc a{display:block;padding:8px 0 8px 13px;border-left:2px solid transparent;color:var(--muted);font-size:12px;line-height:1.5;transition:color .2s,border-color .2s}.toc a:hover,.toc a:focus-visible{color:var(--deep);border-color:var(--accent)}.rail-foot{margin-top:70px;border-top:1px solid var(--line);padding-top:18px;color:var(--muted);font-size:11px;line-height:1.8}
+    main{min-width:0;padding-bottom:120px}.mast{padding:60px 0 72px;border-bottom:1px solid var(--line)}.mast-top{display:flex;justify-content:space-between;align-items:center;gap:20px}.eyebrow{color:var(--accent)}.print{border:1px solid #bdccc2;background:transparent;padding:7px 14px;border-radius:4px;color:var(--deep);cursor:pointer;font-size:11px;white-space:nowrap}.print:hover{background:var(--mint)}h1{font:500 clamp(43px,6vw,78px)/1.15 var(--serif);letter-spacing:-.055em;color:var(--deep);margin:62px 0 13px}h1 span{display:block;font:700 12px/1.5 var(--sans);letter-spacing:.25em;color:var(--accent);margin-bottom:16px} .subtitle{font-size:18px;color:#4d6760;margin:0 0 36px}.meta{display:flex;flex-wrap:wrap;gap:10px}.tag{display:inline-block;padding:5px 11px;border:1px solid var(--line);border-radius:3px;color:#62726b;font-size:11px;line-height:1.4}.tag-strong{background:var(--deep);color:#fff;border-color:var(--deep)}.intro{max-width:720px;margin:34px 0 0;color:var(--muted);font-size:13px}.intro a{text-decoration:underline;text-underline-offset:3px;color:var(--deep)}
+    section{padding-top:82px;scroll-margin-top:18px}.section-head{display:flex;align-items:flex-start;gap:22px;margin-bottom:28px}.section-no{color:var(--accent);border-top:2px solid var(--accent);padding-top:10px;min-width:37px}.section-head h2{font:500 clamp(28px,3vw,40px)/1.3 var(--serif);letter-spacing:-.04em;margin:0;color:var(--deep)}.prose{max-width:760px}.prose p{margin:0 0 18px}.lead{font-size:17px;color:#344943;line-height:1.95}.small{font-size:12px;color:var(--muted)}strong{color:#23453c;font-weight:700}code{font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;background:#ebf1ea;padding:2px 5px;border-radius:3px}
+    .flow{background:var(--deep);color:#eaf4ee;border-radius:6px;margin:36px 0 16px;padding:33px 32px 28px;overflow:hidden;position:relative}.flow:before{content:"";position:absolute;width:300px;height:300px;border:1px solid #ffffff0e;border-radius:50%;right:-90px;top:-150px}.flow-title{color:#a8c9b8;font:700 10px var(--sans);letter-spacing:.2em;margin-bottom:25px}.flow-row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px}.flow-node{position:relative;min-width:0;padding:14px 10px 13px;border:1px solid #6b9d8d;background:#ffffff0c;border-radius:3px;text-align:center;font-size:12px;font-weight:650;line-height:1.45}.flow-node:not(:last-child):after{content:"→";position:absolute;right:-18px;top:50%;transform:translateY(-50%);color:#91b8a9;font-size:17px}.flow-node small{display:block;color:#b5d0c1;font-size:10px;font-weight:400;margin-top:5px}.flow-band{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:23px;padding-top:22px;border-top:1px solid #ffffff31}.band-item{background:#ffffff0b;border-left:2px solid #a9c4ad;padding:11px 15px;font-size:11px;line-height:1.7}.band-item b{display:block;color:#d9eae0;font-size:12px}.flow-note{font-size:12px;color:var(--muted);margin-bottom:0}
+    .table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:5px;background:var(--white)}table{width:100%;border-collapse:collapse;min-width:620px;font-size:12px;line-height:1.75}thead{background:#eaf0e8;color:var(--deep)}th{text-align:left;font-weight:700}th,td{padding:13px 16px;vertical-align:top;border-bottom:1px solid #e8ece6}tbody tr:last-child td{border-bottom:0}tbody tr:hover{background:#f5f8f3}td:first-child{color:var(--deep);font-weight:650;white-space:nowrap}.table-wrap.wide table{min-width:750px}.table-wrap.wide td:first-child{white-space:normal;min-width:130px}.table-label{color:var(--muted);margin-bottom:11px}
+    .principle{margin:25px 0 0;background:var(--mint);border-left:3px solid var(--accent);padding:17px 22px;color:#345e50;font-size:13px}.principle strong{color:var(--deep)}
+    h3{font:500 24px/1.5 var(--serif);color:var(--deep);letter-spacing:-.025em;margin:0 0 20px}.subsection{padding:28px 0 34px;border-top:1px solid var(--line)}.subsection:first-of-type{border-top:0;padding-top:0}.step-list{margin:0;padding:0;list-style:none;counter-reset:step;display:grid;gap:0}.step-list li{counter-increment:step;display:grid;grid-template-columns:34px 1fr;gap:14px;padding:12px 0;font-size:13px;line-height:1.85;color:#41514b}.step-list li:before{content:counter(step,decimal-leading-zero);font:700 11px/2 var(--sans);color:var(--accent)}.note{border:1px solid #e7d7c5;background:var(--warm-bg);padding:17px 20px;margin:15px 0 0;border-radius:3px;font-size:12px;line-height:1.8;color:#765744}.note strong{color:#865338}
+    .slice-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:14px}.slice{background:var(--white);border:1px solid var(--line);border-radius:4px;padding:25px 24px}.slice-label{font-size:10px;font-weight:800;letter-spacing:.18em;color:var(--accent)}.slice h3{font:500 20px/1.45 var(--serif);margin:10px 0 13px}.slice p{margin:0;color:#556961;font-size:12px}.slice.p1{background:#eef2ed}.slice.p1 .slice-label{color:#a07154}
+    .card-list{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.card{border-top:2px solid var(--accent);background:var(--white);padding:21px 20px 23px;min-height:185px}.card-number{color:var(--accent);font-size:10px;font-weight:800;letter-spacing:.15em}.card h3{font:500 19px/1.45 var(--serif);margin:12px 0}.card p{font-size:12px;color:#5b6e63;margin:0}.question-list{counter-reset:question;list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}.question-list li{counter-increment:question;display:grid;grid-template-columns:35px 1fr;gap:14px;border-bottom:1px solid var(--line);padding:15px 0;font-size:13px}.question-list li:before{content:counter(question,decimal-leading-zero);font:700 11px/2 var(--sans);color:var(--warm)}.afterword{margin-top:25px;color:var(--muted);font-size:12px}.footer{border-top:1px solid var(--line);margin-top:96px;padding-top:24px;display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:11px}
+    @media(max-width:1000px){.shell{grid-template-columns:188px minmax(0,1fr);gap:30px;padding:0 28px}.rail{padding-right:15px}.flow-row{gap:12px}.flow-node:not(:last-child):after{right:-12px}.card-list{grid-template-columns:1fr}.card{min-height:0}}
+    @media(max-width:720px){.shell{display:block;padding:0 20px}.rail{min-height:0;padding:14px 0;border-right:0;border-bottom:1px solid var(--line)}.rail-inner{position:static}.brand{font-size:15px}.rail-label,.toc,.rail-foot{display:none}.mast{padding:37px 0 47px}h1{margin:48px 0 10px}section{padding-top:60px}.section-head{gap:13px}.section-no{min-width:27px}.flow{padding:24px 18px}.flow-row{grid-template-columns:1fr;gap:10px}.flow-node:not(:last-child):after{position:static;display:block;transform:none;line-height:1;height:0;position:absolute;top:auto;bottom:-13px;left:calc(50% - 4px);right:auto;content:"↓"}.flow-band{grid-template-columns:1fr}.slice-grid{grid-template-columns:1fr}.footer{margin-top:60px}.step-list li{grid-template-columns:28px 1fr;gap:8px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+    @media print{@page{size:A4;margin:17mm 15mm}body{background:white;font-size:11px;color:#18231f}.topline,.rail,.print{display:none!important}.shell{display:block;padding:0;max-width:none}main{padding:0}.mast{padding:0 0 22px}h1{margin:22px 0 6px;font-size:38px}.section-head h2{font-size:25px}section{padding-top:28px;break-inside:avoid-page}.flow{background:#f1f5f1;color:#1e302e;border:1px solid #cbd9cf;padding:18px}.flow-title,.flow-node small{color:#405d50}.flow-node{background:white;border-color:#b9cec2}.flow-node:not(:last-child):after{color:#405d50}.flow-band{border-color:#dce5df}.band-item{color:#29483d;background:#eaf2e9}.band-item b{color:#173d34}.table-wrap,.slice,.card,.note,.principle{-webkit-print-color-adjust:exact;print-color-adjust:exact}tr,.card,.slice,.subsection{break-inside:avoid}table{font-size:10px}th,td{padding:7px 9px}.footer{margin-top:26px}}
+  </style>
+</head>
+<body>
+  <div class="topline" aria-hidden="true"></div>
+  <div class="shell">
+    <aside class="rail" aria-label="文档目录"><div class="rail-inner">
+      <a class="brand" href="#top"><span class="mark" aria-hidden="true">Z</span><span>ZenRouter</span></a>
+      <div class="rail-label">DOCUMENT INDEX</div>
+      <nav class="toc" aria-label="章节导航">
+        <a href="#overview">01 · 定位与业务闭环</a><a href="#entities">02 · 业务主体与对象</a><a href="#capabilities">03 · 业务能力地图</a><a href="#journeys">04 · 三条业务链路</a><a href="#phases">05 · P0 / P1 业务切面</a><a href="#pages">06 · 关键业务页面</a><a href="#questions">07 · 待确认问题</a>
+      </nav>
+      <div class="rail-foot">BUSINESS ARCHITECTURE<br>讨论稿 v0.1 · 设计输入<br>非技术架构与交付承诺</div>
+    </div></aside>
+    <main id="top">
+      <header class="mast">
+        <div class="mast-top"><div class="eyebrow">PRODUCT BLUEPRINT / 业务设计</div><button class="print" type="button" onclick="window.print()" aria-label="打印或导出 PDF">打印 / 导出 PDF ↗</button></div>
+        <h1><span>ZENROUTER · 01</span>业务架构草案</h1>
+        <p class="subtitle">企业级 AI 路由与治理平台</p>
+        <div class="meta"><span class="tag tag-strong">讨论稿 v0.1</span><span class="tag">业务架构</span><span class="tag">待共同确认</span></div>
+        <p class="intro">依据<a href="product-requirements.md">产品需求基线</a>整理业务能力及边界。本文描述业务如何运作，不代表技术组件、服务拆分、技术选型或交付承诺已经确定。</p>
+        <p class="intro">后续细化：<a href="business-modules.html">业务模块拆分 →</a>，按组织与权限、安全与审计、模型与路由、额度与成本四个一级模块归并。</p>
+      </header>
+
+      <section id="overview" aria-labelledby="h-overview">
+        <div class="section-head"><span class="section-no">01</span><h2 id="h-overview">一句话定位与闭环</h2></div>
+        <div class="prose"><p class="lead">ZenRouter 位于企业应用与获准模型服务之间，围绕<strong>一次 AI 调用</strong>完成「接入身份 → 判断能否调用 → 检查内容 → 在合规候选中路由 → 执行及故障处理 → 记录与计费 → 风险复核与优化」的闭环。所有“全量”均指<strong>经过网关的调用覆盖范围</strong>；正文由企业选择不留存、部分／脱敏或完整留存，并单独限定企业内部或获准外部存储。</p></div>
+        <figure class="flow" aria-label="业务闭环图：应用通过统一接入、治理决策和路由执行访问模型；控制台管理已发布配置，调用记录支持风险、成本和质量分析，分析结果反馈控制台。">
+          <figcaption class="flow-title">THE OPERATING LOOP · 核心业务闭环</figcaption>
+          <div class="flow-row"><div class="flow-node">企业应用<small>开发者</small></div><div class="flow-node">统一接入<small>身份识别</small></div><div class="flow-node">治理决策<small>权限 · 安全 · 预算</small></div><div class="flow-node">路由与执行<small>重试 · Fallback</small></div><div class="flow-node">模型端点<small>公有 / 私有</small></div></div>
+          <div class="flow-band"><div class="band-item"><b>控制侧 ↓</b>管理员 / 安全 / 项目负责人 → 资源、权限、预算、策略发布 → 生效配置作用于调用链路</div><div class="band-item"><b>证据与反馈 ↺</b>接收、决策、尝试、响应和用量 → 调用记录与审计 → 风险运营 / 成本分析 / 质量评测 → 策略优化</div></div>
+        </figure><p class="flow-note">图中的模块是业务责任划分，不代表必须分别部署为微服务。</p>
+      </section>
+
+      <section id="entities" aria-labelledby="h-entities"><div class="section-head"><span class="section-no">02</span><h2 id="h-entities">业务主体与关键对象</h2></div>
+        <div class="table-label">CORE BUSINESS OBJECTS</div><div class="table-wrap"><table><thead><tr><th scope="col">业务对象</th><th scope="col">含义与关键关系</th></tr></thead><tbody>
+          <tr><td>企业／组织／项目／应用</td><td>管理归属、授权、预算、可见性及费用归因的层级；具体租户和组织模型待定。</td></tr>
+          <tr><td>认证主体／虚拟密钥</td><td>应用访问网关的身份；凭证本体与审计标识分离，上游凭证不暴露给应用。</td></tr>
+          <tr><td>模型目录／端点</td><td>模型能力与供应商／私有实例；描述协议、流式、工具调用、结构化输出、上下文长度、地域等能力。</td></tr>
+          <tr><td>业务模型别名</td><td>应用稳定使用的模型入口，映射到经权限、安全及能力筛选的候选。</td></tr>
+          <tr><td>策略版本</td><td>路由、安全、权限、预算与记录策略的生效快照；一次调用要能追溯实际版本。</td></tr>
+          <tr><td>逻辑请求／上游尝试</td><td>一次应用调用对应一个 <code>request_id</code>，重试或 Fallback 产生多个 <code>attempt_id</code>，且各自可能产生费用。</td></tr>
+          <tr><td>安全判断／风险事件</td><td>对输入、输出或工具参数的检测结果与处置；风险事件关联原请求、证据、检测器及规则版本。</td></tr>
+          <tr><td>用量／预算占用／结算</td><td>区分估算、实际上游用量与待对账状态；按组织、项目、应用等维度归因。</td></tr>
+          <tr><td>管理审计事件</td><td>策略、权限、预算、密钥、记录配置变更，以及敏感原文查看／导出的证据。</td></tr>
+        </tbody></table></div>
+      </section>
+
+      <section id="capabilities" aria-labelledby="h-capabilities"><div class="section-head"><span class="section-no">03</span><h2 id="h-capabilities">业务能力地图</h2></div>
+        <div class="table-label">CAPABILITY DOMAINS</div><div class="table-wrap wide"><table><thead><tr><th scope="col">业务域</th><th scope="col">核心责任</th><th scope="col">主要用户</th></tr></thead><tbody>
+          <tr><td>接入与身份</td><td>统一 API、协议兼容、虚拟密钥、认证、组织／项目／应用归属及模型授权。</td><td>开发者、项目负责人、平台管理员</td></tr>
+          <tr><td>模型资源管理</td><td>供应商／私有端点接入、凭证引用、模型能力、健康状态与业务模型别名。</td><td>平台管理员</td></tr>
+          <tr><td>治理决策</td><td>基于身份、模型能力、地域、安全、预算等强约束筛选候选；决定路由、超时、重试、Fallback，并给出解释。</td><td>项目负责人、平台管理员</td></tr>
+          <tr><td>内容安全与策略</td><td>输入／输出／工具参数检测、脱敏、拦截、受约束重路由；规则版本、观察、试跑、灰度和回滚。</td><td>安全人员、平台管理员</td></tr>
+          <tr><td>调用执行与可靠性</td><td>模型请求转换和响应处理、流式输出、取消、错误分类、重试／熔断／切换。</td><td>开发者、平台管理员</td></tr>
+          <tr><td>成本与预算</td><td>预算预占、结算与异常释放、限流、价格版本、消耗归因、异常告警与对账。</td><td>成本管理人员、项目负责人</td></tr>
+          <tr><td>记录与审计</td><td>接收元数据、请求与尝试链、管理操作审计、可配置正文留存与存储边界、获准原文访问及完整性监控。</td><td>开发者、审计人员</td></tr>
+          <tr><td>风险运营</td><td>事件检索、证据查看、人工复核、处置流转、误报及检测失败分析。</td><td>安全／审计人员</td></tr>
+          <tr><td>质量与优化</td><td>业务评测集、反馈、回放、影子流量、A/B、成本与质量对比及策略优化。</td><td>项目负责人、平台管理员</td></tr>
+          <tr><td>平台运维</td><td>私有部署、配置发布与恢复、运行健康、积压、告警和备份恢复。</td><td>平台管理员、运维人员</td></tr>
+        </tbody></table></div>
+        <p class="principle"><strong>边界原则</strong>　权限、安全和地域约束先确定“允许做什么”，路由优化只在获准候选中决定“选哪个”。预算不是单纯报表；审计不是普通访问日志；风险复核不能改写原检测结果。</p>
+      </section>
+
+      <section id="journeys" aria-labelledby="h-journeys"><div class="section-head"><span class="section-no">04</span><h2 id="h-journeys">三条业务链路</h2></div>
+        <div class="subsection"><h3>4.1　接入与发布链路 <span class="small">/ 控制侧</span></h3><ol class="step-list">
+          <li>平台管理员登记供应商／私有端点、能力与凭证引用，维护模型目录及业务模型别名。</li>
+          <li>管理员配置组织、项目、应用与角色；项目负责人申请或配置虚拟密钥、授权模型及预算。</li>
+          <li>安全人员配置检测器、安全规则及异常策略；平台与项目负责人配置路由和记录策略。</li>
+          <li>策略以<strong>草稿 → 校验／试跑 → 观察／灰度 → 正式生效 → 回滚</strong>管理版本，并记录操作者、变更摘要与生效范围。</li>
+          <li>调用链路使用已验证的生效配置；控制侧短暂不可用时，配置有效期及撤权、密钥撤销、预算一致性等边界需另行设计。</li>
+        </ol></div>
+        <div class="subsection"><h3>4.2　单次调用链路 <span class="small">/ 运行侧</span></h3><ol class="step-list">
+          <li>收到请求，生成 <code>request_id</code> 并可靠留下<strong>接收记录</strong>；包括后续鉴权拒绝、校验失败与安全拦截。认证凭证不得写入日志。强留痕场景下记录不可用应执行明确的拒绝策略。</li>
+          <li>完成认证、应用归属、模型授权与请求能力校验；确定适用策略版本及允许的候选集合。</li>
+          <li>执行输入及工具参数的同步检测，按策略放行、脱敏、阻断或限制候选；保留原始内容与实际发送内容的变换关系（保存原文的范围由记录策略决定）。</li>
+          <li>检查限流并预占预算，在能力、地域、权限与安全约束内选定端点，记录候选排除与选择依据。</li>
+          <li>发起上游 <code>attempt_id</code>；按错误类别和总耗时／次数上限重试或 Fallback。每次尝试分别记录状态、耗时及已发生的用量。</li>
+          <li>对输出执行适用的同步检查，处理流式释放与中途阻断、取消、断流等状态；已经释放的内容不能撤回，也不能无提示拼接另一份模型响应。</li>
+          <li>返回最终结果，补齐逻辑请求记录，完成预算结算、释放或待对账标记；异步检测可追加风险事件，但不改写当时已执行的动作。</li>
+        </ol><p class="note"><strong>异常口径</strong>　检测失败显示“未检测／检测失败／部分检测”，不视为通过；记录缺失、用量未知及不完整流式结果分别标识。重试增加上游尝试数及可能的费用，不增加逻辑请求数。</p></div>
+        <div class="subsection"><h3>4.3　运营与优化链路 <span class="small">/ 分析侧</span></h3><ol class="step-list">
+          <li>请求记录汇集身份、输入／输出、路由理由、尝试链、安全结果、用量、策略版本和完整性状态。</li>
+          <li>安全人员检索风险、查看获授权的证据，追加人工判断和处置记录；原检测结论保持可追溯。</li>
+          <li>成本人员核对预算、估算／实际用量和价格版本；管理员监控可靠性、记录积压及检测失败。</li>
+          <li>在质量评测集与业务反馈具备后，比较规则与候选方案；影子流量和 A/B 仍服从权限、地域、内容安全及费用归因约束，评估后再发布新版本。</li>
+        </ol></div>
+      </section>
+
+      <section id="phases" aria-labelledby="h-phases"><div class="section-head"><span class="section-no">05</span><h2 id="h-phases">P0 / P1 的业务切面</h2></div>
+        <p class="small" style="margin:-12px 0 24px">以下是建议范围，并非已确认排期。</p>
+        <div class="slice-grid"><article class="slice"><div class="slice-label">PHASE 00 · 受控试点</div><h3>建立可运行的治理闭环</h3><p>应用拿虚拟密钥接入首批模型 → 在强约束内路由并可靠调用 → 所有进入网关的请求可追溯 → 输入／输出基础风险检测与策略处置 → 预算预占结算、审计和基础风险复核 → 私有部署与恢复验证。</p></article><article class="slice p1"><div class="slice-label">PHASE 01 · 验证优化</div><h3>建立可验证的运营闭环</h3><p>质量评测集、影子流量、A/B、动态路由优化、成本归因深化、历史重扫、复杂检测组合和风险处置闭环。</p></article></div>
+        <p class="note"><strong>明确边界</strong>　首期不承担 GPU 调度、完整 Agent 编排、模型转售商城或所有多模态附件的深度内容检测；工具调用可检查模型提出的参数，实际工具执行控制需执行端或 MCP 网关配合。</p>
+      </section>
+
+      <section id="pages" aria-labelledby="h-pages"><div class="section-head"><span class="section-no">06</span><h2 id="h-pages">建议先画的三个关键业务页面</h2></div>
+        <div class="card-list"><article class="card"><div class="card-number">SCREEN 01</div><h3>请求详情</h3><p>以 <code>request_id</code> 为中心，串联身份、原始／实际内容、路由解释、尝试、流式完整性、用量、安全命中与策略版本。</p></article><article class="card"><div class="card-number">SCREEN 02</div><h3>安全策略编辑与发布</h3><p>作用范围、检测位置、条件、动作、异常行为、冲突提示、试跑、观察／灰度和版本回滚。</p></article><article class="card"><div class="card-number">SCREEN 03</div><h3>风险事件复核</h3><p>多次检测关联同一调用，展示脱敏证据、人工复核、处理轨迹与敏感原文访问审计。</p></article></div>
+      </section>
+
+      <section id="questions" aria-labelledby="h-questions"><div class="section-head"><span class="section-no">07</span><h2 id="h-questions">下一轮需要业务确认的问题</h2></div>
+        <ol class="question-list"><li>首个试点是哪个应用／团队？首批模型、客户端协议、流式与工具调用需求是什么？</li><li>项目仅供内部使用，还是计划向外部企业交付？组织和租户如何隔离？</li><li>请求／响应正文、附件及风险证据的默认留存模式、期限、地域与原文查看权限是什么？</li><li>检测超时、预算未知、记录不可用和流式中途风险各默认采取什么动作？</li><li>企业／项目策略冲突如何裁决，谁能发布、紧急回滚和批准例外？</li><li>预算采用什么币种、口径、预占容差及对账周期？</li><li>怎样衡量业务质量、允许多大延迟与成本、何时终止实验？</li></ol>
+        <p class="afterword">上述问题确定后，再细化权限矩阵、请求状态机、策略优先级、字段字典、验收指标与技术架构。</p>
+      </section>
+      <footer class="footer"><span>ZenRouter / 业务架构草案</span><span>DISCUSSION DRAFT · V0.1</span><a href="prototype.html">初版交互原型 ↗</a></footer>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,141 @@
+{
+  "document": "../technical-architecture.md",
+  "section": "10",
+  "checked_on": "2026-10-30",
+  "status": "research_and_delivery_proposal",
+  "user_scope": [
+    "Local development",
+    "Docker single application container",
+    "Docker Compose",
+    "Cluster deployment"
+  ],
+  "method": "Read official deployment documentation and selected files at an observed GitHub main commit; compare with ZenRouter's PostgreSQL ledger, Rust/Python runtime and enterprise-controlled file retention. No installation or runtime verification.",
+  "repository": {
+    "name": "QuantumNous/new-api",
+    "ref": "main",
+    "commit": "4193734a2abf2764375f29c26be8f540e9b9d4db",
+    "qualification": "Snapshot of main, not a certified deployed release.",
+    "files": [
+      {
+        "path": "Dockerfile",
+        "blob_sha": "3a2bc74db7fc9d1f412cc7c03c86b7e776a734bc",
+        "url": "https://github.com/QuantumNous/new-api/blob/4193734a2abf2764375f29c26be8f540e9b9d4db/Dockerfile",
+        "read_range": "1-180"
+      },
+      {
+        "path": "docker-compose.yml",
+        "blob_sha": "b2573de3ff66facde31a4442e1fb55c19db0a5a3",
+        "url": "https://github.com/QuantumNous/new-api/blob/4193734a2abf2764375f29c26be8f540e9b9d4db/docker-compose.yml",
+        "read_range": "1-180"
+      },
+      {
+        "path": "README.md",
+        "blob_sha": "82dbd61e179588183fd4ef33bf5aef98f1c62f5a",
+        "url": "https://github.com/QuantumNous/new-api/blob/4193734a2abf2764375f29c26be8f540e9b9d4db/README.md",
+        "read_range": "1-230"
+      },
+      {
+        "path": ".github/workflows/docker-build.yml",
+        "blob_sha": "7097fc3b1c2716f1338ab56b361fd1985a12bd1a",
+        "url": "https://github.com/QuantumNous/new-api/blob/4193734a2abf2764375f29c26be8f540e9b9d4db/.github/workflows/docker-build.yml",
+        "read_range": "1-220"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "topic": "New API installation overview",
+      "url": "https://docs.newapi.pro/zh/docs/installation",
+      "use": "Deployment modes offered in official docs."
+    },
+    {
+      "topic": "New API Docker",
+      "url": "https://docs.newapi.pro/zh/docs/installation/deployment-methods/docker-installation",
+      "use": "Single application container can connect to external PostgreSQL; local SQLite path is distinct."
+    },
+    {
+      "topic": "New API Compose",
+      "url": "https://docs.newapi.pro/zh/docs/installation/deployment-methods/docker-compose-installation",
+      "use": "Application and stateful dependencies composed together."
+    },
+    {
+      "topic": "New API cluster",
+      "url": "https://docs.newapi.pro/zh/docs/installation/deployment-methods/cluster-deployment",
+      "use": "Multi-host examples and shared database/secrets; do not import its primary/replica application semantics."
+    },
+    {
+      "topic": "New API development",
+      "url": "https://docs.newapi.pro/zh/docs/installation/deployment-methods/local-development",
+      "use": "Separate frontend/backend dev workflow; minimum versions not adopted."
+    },
+    {
+      "topic": "Docker multi-process",
+      "url": "https://docs.docker.com/engine/containers/multi-service_container/",
+      "use": "Process supervision and init boundaries; ZenRouter drain sequence is our design."
+    },
+    {
+      "topic": "Compose readiness",
+      "url": "https://docs.docker.com/compose/how-tos/startup-order/",
+      "use": "Running dependencies are not necessarily ready; healthy/completion conditions."
+    },
+    {
+      "topic": "Compose production",
+      "url": "https://docs.docker.com/compose/how-tos/production/",
+      "use": "Environment override and single-server deployment; Compose alone not a multi-host HA solution."
+    },
+    {
+      "topic": "Docker multi-platform",
+      "url": "https://docs.docker.com/build/building/multi-platform/",
+      "use": "Per-platform artifacts and manifest lists; separate tests required."
+    },
+    {
+      "topic": "Kubernetes PV",
+      "url": "https://kubernetes.io/docs/concepts/storage/persistent-volumes/",
+      "use": "Access mode requirements; RWX alone is not application mutual exclusion or a durability/HA guarantee."
+    },
+    {
+      "topic": "Kubernetes probes",
+      "url": "https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/",
+      "use": "Startup/liveness/readiness separation."
+    },
+    {
+      "topic": "Kubernetes sidecars",
+      "url": "https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/",
+      "use": "Existing architecture evidence for lifecycle."
+    },
+    {
+      "topic": "Kubernetes termination",
+      "url": "https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/",
+      "use": "Existing architecture evidence for draining; ordinary containers have no guaranteed stop order."
+    }
+  ],
+  "engineering_decisions": [
+    "Use a common release and configurable runtime roles across delivery modes.",
+    "Compose default install; Docker single application container requires external PostgreSQL; no zero-dependency SQLite/all-in-one database promise.",
+    "Include Rust runtime, static UI and pinned Python adapter; supervise and drain multiple processes.",
+    "Multi-host body retention requires approved shared persistent storage with per-writer segments and recoverable indexing.",
+    "Cluster packaging includes multi-host Docker and Kubernetes/Helm targets; stages are proposed, not implemented."
+  ],
+  "not_performed": [
+    "New API deployment",
+    "ZenRouter backend implementation",
+    "Container build or image publication",
+    "Docker Compose/Helm installation",
+    "Multi-architecture runtime checks",
+    "Two-host storage or quota tests",
+    "Performance, failure injection or recovery validation"
+  ],
+  "local_validation_scope": "Documentation rendering, local links/anchors, SVG and browser layout only.",
+  "local_validation": {
+    "on": "2026-10-30",
+    "result": "passed",
+    "checks": [
+      "Documentation renders with 13 stable main section anchors",
+      "Desktop/mobile layout, architecture focus controls, and print styles",
+      "Deployment SVG image loading, text bounds, and mobile/print sizing",
+      "141 local links/anchors including declared prototype routes",
+      "SVG XML and source-manifest JSON parsing"
+    ],
+    "backend_or_container_validation": false
+  }
+}

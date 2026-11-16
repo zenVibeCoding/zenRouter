@@ -1,0 +1,353 @@
+{
+  "checked_on": "2026-10-29",
+  "method": "Official documentation, fixed-commit source inspection and package metadata; no compilation or runtime verification.",
+  "main_commit": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+  "release": {
+    "tag": "v1.106.6",
+    "commit": "61c6ab78393ef45683dd7d963d2a315bd845e20b"
+  },
+  "files": [
+    {
+      "path": "litellm-rust/crates/litellm/Cargo.toml",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/litellm/Cargo.toml",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__litellm__Cargo.toml",
+      "sha256": "f9474d7317aae31f931332ca99ce783f054b47b3430abaecee42be9b8121499c"
+    },
+    {
+      "path": "litellm-rust/crates/litellm/src/lib.rs",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/litellm/src/lib.rs",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__litellm__src__lib.rs",
+      "sha256": "eee65d7fa150a72f8c5e6a2d2dbb814d464e4c47b044f8a7265aa52fab5fba4e"
+    },
+    {
+      "path": "litellm-rust/crates/gateway/Cargo.toml",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/gateway/Cargo.toml",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__gateway__Cargo.toml",
+      "sha256": "1a2c61196b68f6cb11ebe410fdc9ba45fab36b1246a6816e947225ce818117ac"
+    },
+    {
+      "path": "litellm-rust/crates/gateway/README.md",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/gateway/README.md",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__gateway__README.md",
+      "sha256": "cb1f3a445016153630057c83bd7a734321552141e3b9e85316e69354871de24c"
+    },
+    {
+      "path": "litellm-rust/crates/gateway-inference/src/lib.rs",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/gateway-inference/src/lib.rs",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__gateway-inference__src__lib.rs",
+      "sha256": "8835b08eca8b838066ca79a9f45d1625e6106c715e50afbfca126ebd5fcee219"
+    },
+    {
+      "path": "litellm-rust/crates/inference-messages/src/route.rs",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/inference-messages/src/route.rs",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__inference-messages__src__route.rs",
+      "sha256": "4f34fc82f4878cafccbceb66faf198565472e0ea705f190e4261d640aac99edf"
+    },
+    {
+      "path": "litellm-rust/crates/inference-chat/src/lib.rs",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/inference-chat/src/lib.rs",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__inference-chat__src__lib.rs",
+      "sha256": "505264da3c07bfd84649b94684377484c8cacfd269cd36090d8ef4333fddc002"
+    },
+    {
+      "path": "litellm-rust/crates/inference-responses/src/route.rs",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/inference-responses/src/route.rs",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__inference-responses__src__route.rs",
+      "sha256": "2ab90f3a29890e17f30441cb4267f1c8c0bfd112ce9643122d6449e471066730"
+    },
+    {
+      "path": "litellm-rust/crates/host-native/src/lib.rs",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/host-native/src/lib.rs",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__host-native__src__lib.rs",
+      "sha256": "0fa651df81588a35914d27ce7f8dfdfa5202f3b6fc6f03a98032d799359fdbb5"
+    },
+    {
+      "path": "litellm-rust/crates/host-python/Cargo.toml",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/host-python/Cargo.toml",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__host-python__Cargo.toml",
+      "sha256": "dbb51c7c5c7d6db4bc06fa593ef86eb9e5d30dce64e52f342b609e9cfe496b2e"
+    },
+    {
+      "path": "litellm-rust/crates/inference-messages/src/common_utils.rs",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/inference-messages/src/common_utils.rs",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__inference-messages__src__common_utils.rs",
+      "sha256": "23fde95228f04a3e0eb45afc1dfeaa94d1d0e1655cf375cdb3d973eb8309988c"
+    },
+    {
+      "path": "litellm-rust/crates/inference-chat/src/common_utils.rs",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/inference-chat/src/common_utils.rs",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__inference-chat__src__common_utils.rs",
+      "sha256": "6b076830b0cfca7e0533d70fd0dd592d4c22de01a19fe05ddf63b9390e9ad1c3"
+    },
+    {
+      "path": "litellm-rust/crates/inference-responses/src/lib.rs",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/inference-responses/src/lib.rs",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__inference-responses__src__lib.rs",
+      "sha256": "dca5ec254b5d6e4f49f21e55d808a06469572ba2bab243838820b1a10e259536"
+    },
+    {
+      "path": "litellm-rust/crates/gateway-inference/src/chat_completions.rs",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/gateway-inference/src/chat_completions.rs",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__gateway-inference__src__chat_completions.rs",
+      "sha256": "33f29814ad8918b2e6c2c5d51337212019e716645e484873a2c7f275ced30e9f"
+    },
+    {
+      "path": "litellm-rust/crates/gateway-inference/src/messages.rs",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/gateway-inference/src/messages.rs",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__gateway-inference__src__messages.rs",
+      "sha256": "3b64b1d4636c8c60b27c4d632a8857fff53fb2e8802348fb132cd03f7b372686"
+    },
+    {
+      "path": "litellm-rust/crates/python-bridge/src/routes/messages/mod.rs",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/python-bridge/src/routes/messages/mod.rs",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__python-bridge__src__routes__messages__mod.rs",
+      "sha256": "a1b864e2beae9c5a6b70d9c4b72de4e46d043e3e061879e47300c782ad591389"
+    },
+    {
+      "path": "litellm-rust/crates/python-bridge/src/preflight.rs",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/python-bridge/src/preflight.rs",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__python-bridge__src__preflight.rs",
+      "sha256": "3d4a0528f5b449857a7123e2b1b7621fe205954407dcc505638e5834efe3647c"
+    },
+    {
+      "path": "litellm-rust/crates/host-native/src/in_process.rs",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/host-native/src/in_process.rs",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__host-native__src__in_process.rs",
+      "sha256": "626930eb63fd3fe16d02186a92c6f7b7cee935bcf7a954e133dc5a6b558868cd"
+    },
+    {
+      "path": "litellm-rust/crates/inference-messages/Cargo.toml",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/inference-messages/Cargo.toml",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__inference-messages__Cargo.toml",
+      "sha256": "ceda6c8b52b41eb98dc1776ecab51e6350c5114c236d7d19dec612fc0786175f"
+    },
+    {
+      "path": "litellm-rust/crates/gateway-inference/Cargo.toml",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/gateway-inference/Cargo.toml",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__gateway-inference__Cargo.toml",
+      "sha256": "9851da8169c9fc0601e52244120a93ebbb8676cc8f10e505c6adb73b0ca442ca"
+    },
+    {
+      "path": "litellm-rust/crates/python-bridge/Cargo.toml",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/python-bridge/Cargo.toml",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__python-bridge__Cargo.toml",
+      "sha256": "bc278fcc18941e3387ef82651435638933afaf0f9875ed0cc3ba5c786cc02fc2"
+    },
+    {
+      "p": "litellm-rust/Cargo.toml",
+      "ref": "61c6ab78393ef45683dd7d963d2a315bd845e20b",
+      "kind": "stable",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/61c6ab78393ef45683dd7d963d2a315bd845e20b/litellm-rust/Cargo.toml",
+      "path": "litellm-rust/Cargo.toml",
+      "local_path": "sources/BerriAI__litellm__stable__litellm-rust__Cargo.toml",
+      "sha256": "05e2b0261b08eecbbe5db7df394be6f24086156fe16037b17554b945a39b8cb8"
+    },
+    {
+      "p": "litellm-rust/crates/gateway-inference/src/lib.rs",
+      "ref": "61c6ab78393ef45683dd7d963d2a315bd845e20b",
+      "kind": "stable",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/61c6ab78393ef45683dd7d963d2a315bd845e20b/litellm-rust/crates/gateway-inference/src/lib.rs",
+      "path": "litellm-rust/crates/gateway-inference/src/lib.rs",
+      "local_path": "sources/BerriAI__litellm__stable__litellm-rust__crates__gateway-inference__src__lib.rs",
+      "sha256": "017195d8c718408c31909e3693ed67155dd95ad9e4acc949fdc73dc2e329ffe2"
+    },
+    {
+      "p": "litellm-rust/crates/inference-chat/src/common_utils.rs",
+      "ref": "61c6ab78393ef45683dd7d963d2a315bd845e20b",
+      "kind": "stable",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/61c6ab78393ef45683dd7d963d2a315bd845e20b/litellm-rust/crates/inference-chat/src/common_utils.rs",
+      "path": "litellm-rust/crates/inference-chat/src/common_utils.rs",
+      "local_path": "sources/BerriAI__litellm__stable__litellm-rust__crates__inference-chat__src__common_utils.rs",
+      "sha256": "af6fed515e71816f73fde5de2b327417dce6b2f6347d98968a6442abbeccb239"
+    },
+    {
+      "p": "litellm-rust/crates/inference-responses/src/lib.rs",
+      "ref": "61c6ab78393ef45683dd7d963d2a315bd845e20b",
+      "kind": "stable",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/61c6ab78393ef45683dd7d963d2a315bd845e20b/litellm-rust/crates/inference-responses/src/lib.rs",
+      "path": "litellm-rust/crates/inference-responses/src/lib.rs",
+      "local_path": "sources/BerriAI__litellm__stable__litellm-rust__crates__inference-responses__src__lib.rs",
+      "sha256": "dbfba29cd0644e2e528536bcceed082b194d2da30089d988224cc31828cd3124"
+    },
+    {
+      "p": "litellm-rust/crates/inference-messages/src/common_utils.rs",
+      "ref": "61c6ab78393ef45683dd7d963d2a315bd845e20b",
+      "kind": "stable",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/61c6ab78393ef45683dd7d963d2a315bd845e20b/litellm-rust/crates/inference-messages/src/common_utils.rs",
+      "path": "litellm-rust/crates/inference-messages/src/common_utils.rs",
+      "local_path": "sources/BerriAI__litellm__stable__litellm-rust__crates__inference-messages__src__common_utils.rs",
+      "sha256": "1bd158bae1ff7bf29f71284be36fb359dd1c6fdb2dc86397b97dad694a235214"
+    },
+    {
+      "p": "litellm-rust/crates/inference-messages/src/handler.rs",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "kind": "main",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/inference-messages/src/handler.rs",
+      "path": "litellm-rust/crates/inference-messages/src/handler.rs",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__inference-messages__src__handler.rs",
+      "sha256": "d3874432e87b967f883bfa57a79efa279eb0e7e3834a2e291df0614da73eb783"
+    },
+    {
+      "p": "litellm-rust/crates/inference-messages/tests/messages/stream.rs",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "kind": "main",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/inference-messages/tests/messages/stream.rs",
+      "path": "litellm-rust/crates/inference-messages/tests/messages/stream.rs",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__inference-messages__tests__messages__stream.rs",
+      "sha256": "65fa336fc19f3e880d9c6e8fd2ac8f5ac848afe1af0d542a5bf1b9aba32f2d7c"
+    },
+    {
+      "p": "litellm-rust/crates/llms/src/base_llm/messages/streaming.rs",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "kind": "main",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/llms/src/base_llm/messages/streaming.rs",
+      "path": "litellm-rust/crates/llms/src/base_llm/messages/streaming.rs",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__llms__src__base_llm__messages__streaming.rs",
+      "sha256": "8261c7217fcf2749bed8cb1aa76a0ad788e60012e85daabda341ee7691ef5ce5"
+    },
+    {
+      "p": "litellm-rust/crates/host-http/src/lib.rs",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "kind": "main",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/host-http/src/lib.rs",
+      "path": "litellm-rust/crates/host-http/src/lib.rs",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__host-http__src__lib.rs",
+      "sha256": "51c64a1961eb24f7b092032bc6f2a23f617f3a1640e64505310553a848528408"
+    },
+    {
+      "p": "litellm-rust/crates/inference-responses/src/prepare.rs",
+      "ref": "61c6ab78393ef45683dd7d963d2a315bd845e20b",
+      "kind": "stable",
+      "path": "litellm-rust/crates/inference-responses/src/prepare.rs",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/61c6ab78393ef45683dd7d963d2a315bd845e20b/litellm-rust/crates/inference-responses/src/prepare.rs",
+      "local_path": "sources/BerriAI__litellm__stable__litellm-rust__crates__inference-responses__src__prepare.rs",
+      "sha256": "f303ba5c43511c21cfd7495ce0164ad5bc5ed202ec18a9ca4d08a224c46c5260"
+    },
+    {
+      "p": "litellm-rust/crates/inference-chat/src/lib.rs",
+      "ref": "61c6ab78393ef45683dd7d963d2a315bd845e20b",
+      "kind": "stable",
+      "path": "litellm-rust/crates/inference-chat/src/lib.rs",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/61c6ab78393ef45683dd7d963d2a315bd845e20b/litellm-rust/crates/inference-chat/src/lib.rs",
+      "local_path": "sources/BerriAI__litellm__stable__litellm-rust__crates__inference-chat__src__lib.rs",
+      "sha256": "a818452974dfdbb3a78b9ea1fe9b92e0631a01f608a247877de4e804b80fdb9a"
+    },
+    {
+      "p": "litellm-rust/crates/llms/src/anthropic/chat/transformation.rs",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "kind": "main",
+      "path": "litellm-rust/crates/llms/src/anthropic/chat/transformation.rs",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/llms/src/anthropic/chat/transformation.rs",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__llms__src__anthropic__chat__transformation.rs",
+      "sha256": "bc5d00cbbd9e1735a8ae9c592d7872b56f82b354d5d7dacb69dd6a510065059e"
+    },
+    {
+      "p": "litellm-rust/crates/inference-messages/src/lib.rs",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "kind": "main",
+      "path": "litellm-rust/crates/inference-messages/src/lib.rs",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/inference-messages/src/lib.rs",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__inference-messages__src__lib.rs",
+      "sha256": "313c3ed8dbec52faa8aaa3cf457bd5d4cb3b1d20340c63fd8d760bbe924b6469"
+    },
+    {
+      "p": "litellm-rust/crates/host-native/Cargo.toml",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "kind": "main",
+      "path": "litellm-rust/crates/host-native/Cargo.toml",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/crates/host-native/Cargo.toml",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__crates__host-native__Cargo.toml",
+      "sha256": "34b60cd9fa690221015dc4eb947796ca455ea6c269e2fd969e0b544004b4d6b8"
+    },
+    {
+      "path": "litellm/google_genai/__init__.py",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm/google_genai/__init__.py",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm__google_genai____init__.py",
+      "sha256": "7d9124e93865d517ba79f380020d311bc0cf490d525c1c47e175b23a386b1013"
+    },
+    {
+      "path": "litellm/google_genai/main.py",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm/google_genai/main.py",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm__google_genai__main.py",
+      "sha256": "e9afdad378271a4d6f9d9fc6ac1689a2f54d5598aff0ccd1c30a4084326bdd28"
+    },
+    {
+      "path": "litellm/anthropic_interface/__init__.py",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm/anthropic_interface/__init__.py",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm__anthropic_interface____init__.py",
+      "sha256": "4970486ab300932593885d6b74d7750e0d2919cf3e24186ff4c706101217c862"
+    },
+    {
+      "path": "litellm/anthropic_interface/messages/__init__.py",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm/anthropic_interface/messages/__init__.py",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm__anthropic_interface__messages____init__.py",
+      "sha256": "f4242a19cbf6052a18e7a4e50d341c6497739dfc8a65622e1f2af43ef472b879"
+    },
+    {
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/LICENSE",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__LICENSE",
+      "sha256": "6de7e623ce73038cb157655d4ee5b15782b385c91be053a814a71b2b6b30efb6"
+    },
+    {
+      "path": "litellm-rust/Cargo.toml",
+      "url": "https://raw.githubusercontent.com/BerriAI/litellm/b25ea48c4b194dbae4d858839619c426f1258ac6/litellm-rust/Cargo.toml",
+      "kind": "main",
+      "ref": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+      "local_path": "sources/BerriAI__litellm__litellm-rust__Cargo.toml",
+      "sha256": "0f4193e5184ff51fa9fe4a520ded8e21faa56ac10ab0dd9f9d5b35da96b60a4b"
+    }
+  ]
+}

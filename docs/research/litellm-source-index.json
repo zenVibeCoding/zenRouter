@@ -1,0 +1,31 @@
+{
+  "sha": "b25ea48c4b194dbae4d858839619c426f1258ac6",
+  "truncated": false,
+  "paths": [
+    "LICENSE",
+    "enterprise/LICENSE.md",
+    "license_cache.json",
+    "litellm-proxy-extras/LICENSE",
+    "litellm/litellm_core_utils/tokenizers/deepseek_tokenizer_LICENSE",
+    "litellm/proxy/auth/litellm_license.py",
+    "litellm/proxy/middleware/budget_reservation_release_middleware.py",
+    "litellm/proxy/spend_tracking/budget_reservation.py",
+    "terraform/provider/LICENSE",
+    "tests/code_coverage_tests/check_licenses.py",
+    "tests/code_coverage_tests/license_cache.json",
+    "tests/e2e/ui/tests/proxy-admin/license.spec.ts",
+    "tests/integration/spend/test_passthrough_budget_reservation.py",
+    "tests/unit/proxy/auth/test_litellm_license.py",
+    "tests/unit/proxy/middleware/test_budget_reservation_release_middleware.py",
+    "tests/unit/proxy/spend_tracking/test_budget_reservation.py",
+    "tests/unit/proxy/spend_tracking/test_budget_reservation_redis_failure.py",
+    "tests/unit/proxy/test_budget_reservation.py",
+    "tests/unit/test_check_licenses.py",
+    "ui/litellm-dashboard/src/app/(dashboard)/hooks/license/useLicenseInfo.ts",
+    "ui/litellm-dashboard/src/components/chat/moyai/FONT-LICENSE.txt",
+    "ui/litellm-dashboard/src/components/chat/moyai/LICENSE.txt",
+    "ui/litellm-dashboard/src/utils/licenseUtils.test.ts",
+    "ui/litellm-dashboard/src/utils/licenseUtils.ts",
+    "vscode-extension/LICENSE"
+  ]
+}

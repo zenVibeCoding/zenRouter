@@ -1,0 +1,235 @@
+{
+  "checked_on": "2026-10-29",
+  "scope": [
+    "组织与权限",
+    "安全与审计",
+    "额度与成本"
+  ],
+  "evidence_level": "官方文档、官方项目仓库元数据与 NeMo 许可文件核查；未部署、编译、安装、调用真实服务或进行性能与故障测试。",
+  "repositories": [
+    {
+      "name": "keycloak/keycloak",
+      "url": "https://github.com/keycloak/keycloak",
+      "language": "Java",
+      "license": "Apache-2.0",
+      "archived": false,
+      "default_branch": "main"
+    },
+    {
+      "name": "apache/casbin-rs",
+      "url": "https://github.com/apache/casbin-rs",
+      "language": "Rust",
+      "license": "Apache-2.0",
+      "archived": false,
+      "default_branch": "master"
+    },
+    {
+      "name": "cedar-policy/cedar",
+      "url": "https://github.com/cedar-policy/cedar",
+      "language": "Rust",
+      "license": "Apache-2.0",
+      "archived": false,
+      "default_branch": "main"
+    },
+    {
+      "name": "openfga/openfga",
+      "url": "https://github.com/openfga/openfga",
+      "language": "Go",
+      "license": "Apache-2.0",
+      "archived": false,
+      "default_branch": "main"
+    },
+    {
+      "name": "data-privacy-stack/presidio",
+      "url": "https://github.com/data-privacy-stack/presidio",
+      "language": "Python",
+      "license": "MIT",
+      "archived": false,
+      "default_branch": "main"
+    },
+    {
+      "name": "NVIDIA-NeMo/Guardrails",
+      "url": "https://github.com/NVIDIA-NeMo/Guardrails",
+      "language": "Python",
+      "license": "NOASSERTION",
+      "archived": false,
+      "default_branch": "develop"
+    },
+    {
+      "name": "tigerbeetle/tigerbeetle",
+      "url": "https://github.com/tigerbeetle/tigerbeetle",
+      "language": "Zig",
+      "license": "Apache-2.0",
+      "archived": false,
+      "default_branch": "main"
+    },
+    {
+      "name": "openmeterio/openmeter",
+      "url": "https://github.com/openmeterio/openmeter",
+      "language": "Go",
+      "license": "Apache-2.0",
+      "archived": false,
+      "default_branch": "main"
+    },
+    {
+      "name": "valkey-io/valkey",
+      "url": "https://github.com/valkey-io/valkey",
+      "language": "C",
+      "license": "BSD-3-Clause",
+      "archived": false,
+      "default_branch": "unstable"
+    },
+    {
+      "name": "ClickHouse/ClickHouse",
+      "url": "https://github.com/ClickHouse/ClickHouse",
+      "language": "C++",
+      "license": "Apache-2.0",
+      "archived": false,
+      "default_branch": "master"
+    }
+  ],
+  "license_clarification": {
+    "repository": "NVIDIA-NeMo/Guardrails",
+    "metadata": "NOASSERTION",
+    "checked_file": "https://github.com/NVIDIA-NeMo/Guardrails/blob/develop/LICENSE.md",
+    "file_spdx": "Apache-2.0",
+    "note": "根文件明确 Apache-2.0；模型、第三方代码、商用服务仍须分别核查。"
+  },
+  "sources": [
+    {
+      "module": "identity",
+      "title": "Keycloak 协议支持",
+      "url": "https://www.keycloak.org/securing-apps/overview"
+    },
+    {
+      "module": "identity",
+      "title": "Keycloak LDAP 与身份代理",
+      "url": "https://www.keycloak.org/docs/latest/server_admin/index.html"
+    },
+    {
+      "module": "identity",
+      "title": "Rust OpenID Connect 库",
+      "url": "https://docs.rs/openidconnect/latest/openidconnect/"
+    },
+    {
+      "module": "identity",
+      "title": "Casbin 域内 RBAC",
+      "url": "https://casbin.apache.org/docs/rbac-with-domains/"
+    },
+    {
+      "module": "identity",
+      "title": "Cedar 策略引擎",
+      "url": "https://docs.cedarpolicy.com/"
+    },
+    {
+      "module": "identity",
+      "title": "OpenFGA 角色与权限",
+      "url": "https://openfga.dev/docs/modeling/roles-and-permissions"
+    },
+    {
+      "module": "identity",
+      "title": "飞书 OAuth 登录",
+      "url": "https://open.feishu.cn/document/qr-code-scanning-login-for-web-app/introduction"
+    },
+    {
+      "module": "identity",
+      "title": "飞书权限与通讯录可见范围",
+      "url": "https://open.feishu.cn/document/server-docs/api-call-guide/generic-error-code"
+    },
+    {
+      "module": "identity",
+      "title": "PostgreSQL RLS 边界",
+      "url": "https://www.postgresql.org/docs/18/ddl-rowsecurity.html"
+    },
+    {
+      "module": "security",
+      "title": "Presidio 能力与识别限制",
+      "url": "https://presidio.dataprivacystack.org/"
+    },
+    {
+      "module": "security",
+      "title": "Presidio 多语言与默认英语",
+      "url": "https://presidio.dataprivacystack.org/analyzer/languages/"
+    },
+    {
+      "module": "security",
+      "title": "NeMo Guardrails 开源库",
+      "url": "https://docs.nvidia.com/nemo/guardrails/about-nemo-guardrails-library/overview"
+    },
+    {
+      "module": "security",
+      "title": "NeMo 输出流检查与释放顺序",
+      "url": "https://docs.nvidia.com/nemo/guardrails/configure-guardrails/yaml-schema/streaming/output-rail-streaming"
+    },
+    {
+      "module": "audit",
+      "title": "Outbox 事件一致性模式",
+      "url": "https://debezium.io/documentation/reference/stable/transformations/outbox-event-router.html"
+    },
+    {
+      "module": "audit",
+      "title": "S3 Object Lock 能力定义",
+      "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html"
+    },
+    {
+      "module": "audit",
+      "title": "OTel 采样不等于全量审计",
+      "url": "https://opentelemetry.io/docs/concepts/sampling/"
+    },
+    {
+      "module": "audit",
+      "title": "ClickHouse 合并去重边界",
+      "url": "https://clickhouse.com/docs/concepts/features/operations/update/replacing-merge-tree"
+    },
+    {
+      "module": "budget",
+      "title": "PostgreSQL 行锁与并发",
+      "url": "https://www.postgresql.org/docs/18/explicit-locking.html"
+    },
+    {
+      "module": "budget",
+      "title": "PostgreSQL 隔离级别与事务重试",
+      "url": "https://www.postgresql.org/docs/18/transaction-iso.html"
+    },
+    {
+      "module": "budget",
+      "title": "PostgreSQL 精确金额",
+      "url": "https://www.postgresql.org/docs/18/datatype-numeric.html"
+    },
+    {
+      "module": "budget",
+      "title": "Valkey 异步复制与故障切换边界",
+      "url": "https://valkey.io/topics/replication/"
+    },
+    {
+      "module": "budget",
+      "title": "TigerBeetle 预占与结转",
+      "url": "https://docs.tigerbeetle.com/coding/two-phase-transfers/"
+    },
+    {
+      "module": "budget",
+      "title": "TigerBeetle 官方 Rust 客户端",
+      "url": "https://docs.tigerbeetle.com/coding/clients/rust/"
+    },
+    {
+      "module": "budget",
+      "title": "OpenMeter 用量计量",
+      "url": "https://openmeter.io/docs/metering/overview"
+    },
+    {
+      "module": "budget",
+      "title": "OpenMeter 异步架构与去重配置",
+      "url": "https://openmeter.io/docs/open-source/architecture"
+    },
+    {
+      "module": "license",
+      "title": "PostgreSQL 许可",
+      "url": "https://www.postgresql.org/about/licence/"
+    }
+  ],
+  "limitations": [
+    "默认分支及 latest 文档可能变化；正式引入时固定版本复核。",
+    "仓库语言和根许可用于初筛，不代表全部依赖、模型权重与镜像许可。",
+    "无真实性能、中文识别效果、跨实例一致性或灾备能力验证。"
+  ]
+}
