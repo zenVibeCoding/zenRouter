@@ -1,0 +1,51 @@
+[workspace]
+resolver = "3"
+members = ["crates/*"]
+default-members = ["crates/runtime"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.97"
+publish = false
+license = "MIT"
+
+[workspace.dependencies]
+# 内部 crate
+zenrouter-domain-identity = { path = "crates/domain-identity" }
+zenrouter-domain-routing = { path = "crates/domain-routing" }
+zenrouter-domain-security = { path = "crates/domain-security" }
+zenrouter-domain-billing = { path = "crates/domain-billing" }
+zenrouter-application = { path = "crates/application" }
+zenrouter-contracts = { path = "crates/contracts" }
+zenrouter-storage = { path = "crates/storage" }
+zenrouter-integrations = { path = "crates/integrations" }
+zenrouter-gateway = { path = "crates/gateway" }
+zenrouter-control-api = { path = "crates/control-api" }
+zenrouter-worker = { path = "crates/worker" }
+
+# 外部依赖：版本在此统一约束，具体解析结果由 Cargo.lock 锁定
+anyhow = "1.0.104"
+axum = "0.8.9"
+clap = { version = "4.6.7", features = ["derive", "env"] }
+figment = { version = "0.10.19", features = ["toml", "env"] }
+nix = { version = "0.32.0", default-features = false, features = ["signal"] }
+reqwest = { version = "0.13.5", default-features = false, features = ["json"] }
+rust_decimal = { version = "1.43.0", features = ["serde-str"] }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.154"
+sqlx = { version = "0.9.0", default-features = false, features = ["runtime-tokio", "tls-rustls-ring-webpki", "postgres", "migrate", "macros"] }
+thiserror = "2.0.21"
+tokio = { version = "1.54.1", features = ["macros", "rt-multi-thread", "net", "signal", "process", "time"] }
+tokio-util = "0.7.20"
+tower = { version = "0.5.3", features = ["util"] }
+tower-http = { version = "0.7.1", features = ["fs", "trace"] }
+tracing = "0.1.44"
+tracing-subscriber = { version = "0.3.23", features = ["env-filter", "json"] }
+uuid = { version = "1.29.2", features = ["v7", "serde"] }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }

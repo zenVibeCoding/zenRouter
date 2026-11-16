@@ -1,0 +1,16 @@
+[package]
+name = "zenrouter-domain-billing"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license.workspace = true
+
+[dependencies]
+serde.workspace = true
+thiserror.workspace = true
+uuid.workspace = true
+rust_decimal.workspace = true
+
+[lints]
+workspace = true

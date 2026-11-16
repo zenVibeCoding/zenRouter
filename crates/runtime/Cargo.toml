@@ -1,0 +1,39 @@
+[package]
+name = "zenrouter-runtime"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license.workspace = true
+description = "ZenRouter 可执行入口：角色选择、配置加载、依赖装配、进程监督与退出编排"
+
+[[bin]]
+name = "zenrouter"
+path = "src/main.rs"
+
+[dependencies]
+zenrouter-application.workspace = true
+zenrouter-contracts.workspace = true
+zenrouter-control-api.workspace = true
+zenrouter-gateway.workspace = true
+zenrouter-integrations.workspace = true
+zenrouter-storage.workspace = true
+zenrouter-worker.workspace = true
+anyhow.workspace = true
+axum.workspace = true
+clap.workspace = true
+figment.workspace = true
+serde.workspace = true
+tokio.workspace = true
+tokio-util.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+[target.'cfg(unix)'.dependencies]
+nix.workspace = true
+
+[dev-dependencies]
+figment = { workspace = true, features = ["test"] }
+
+[lints]
+workspace = true

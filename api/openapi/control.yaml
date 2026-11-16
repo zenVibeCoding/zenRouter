@@ -1,0 +1,82 @@
+openapi: 3.1.0
+info:
+  title: ZenRouter 管理与运行接口
+  version: 0.1.0
+  description: |
+    项目骨架阶段的接口规范。Rust 侧类型位于 crates/contracts，前端类型位于
+    apps/console/src/api.ts；后续通过生成或契约测试与本文件保持一致。
+
+    调用面（OpenAI / Anthropic / Gemini 兼容入口）沿用各协议的官方格式，
+    不在本文件中重复定义；骨架阶段均返回 501。
+servers:
+  - url: http://127.0.0.1:8081
+    description: 本地 control 角色
+paths:
+  /api/v1/system/info:
+    get:
+      summary: 运行实例信息
+      operationId: getSystemInfo
+      tags: [system]
+      responses:
+        '200':
+          description: 实例信息
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SystemInfo' }
+  /livez:
+    get:
+      summary: 存活探针（不检查外部依赖）
+      operationId: getLiveness
+      tags: [probe]
+      responses:
+        '200':
+          description: 进程可响应
+          content:
+            text/plain:
+              schema: { type: string, const: ok }
+  /readyz:
+    get:
+      summary: 就绪探针（按角色检查依赖与排空状态）
+      operationId: getReadiness
+      tags: [probe]
+      responses:
+        '200':
+          description: 就绪
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ReadinessReport' }
+        '503':
+          description: 未就绪或排空中
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ReadinessReport' }
+components:
+  schemas:
+    SystemInfo:
+      type: object
+      required: [name, version, roles, adapter_contract_version]
+      properties:
+        name: { type: string }
+        version: { type: string }
+        roles:
+          type: array
+          items: { type: string, enum: [gateway, control, worker] }
+        adapter_contract_version: { type: string }
+    ReadinessReport:
+      type: object
+      required: [ready, draining, dependencies]
+      properties:
+        ready: { type: boolean }
+        draining: { type: boolean }
+        dependencies:
+          type: array
+          items: { $ref: '#/components/schemas/DependencyReport' }
+    DependencyReport:
+      type: object
+      required: [name, status]
+      properties:
+        name: { type: string }
+        status: { type: string, enum: [ok, degraded, unavailable, skipped] }
+        detail:
+          type: string
+          description: 面向运维的说明；不包含连接串、密钥或正文

@@ -1,0 +1,80 @@
+# ZenRouter 默认安装：应用 + PostgreSQL + Valkey（按 profile 启用）。
+#
+#   cp deploy/compose/.env.example deploy/compose/.env   # 修改密码
+#   docker compose -f deploy/compose/compose.yaml up -d
+#
+# 迁移作为一次性任务先完成，应用在迁移成功后启动。
+# 单宿主机部署不宣称跨主机高可用。
+
+name: zenrouter
+
+x-app: &app
+  image: ${ZENROUTER_IMAGE:-zenrouter:dev}
+  build:
+    context: ../..
+    dockerfile: deploy/docker/Dockerfile
+  environment:
+    ZENROUTER__DATABASE__URL: postgres://zenrouter:${POSTGRES_PASSWORD:?请在 .env 中设置 POSTGRES_PASSWORD}@postgres:5432/zenrouter
+    ZENROUTER__CONTENT__BACKEND: ${ZENROUTER_CONTENT_BACKEND:-none}
+
+services:
+  postgres:
+    image: postgres:18.7-trixie
+    environment:
+      POSTGRES_USER: zenrouter
+      POSTGRES_DB: zenrouter
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?请在 .env 中设置 POSTGRES_PASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U zenrouter -d zenrouter"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  valkey:
+    image: valkey/valkey:9.0.7-trixie
+    profiles: ["valkey"]
+    volumes:
+      - valkey-data:/data
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  migrate:
+    <<: *app
+    command: ["migrate"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
+
+  zenrouter:
+    <<: *app
+    command: ["serve", "--roles", "all"]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    ports:
+      - "${ZENROUTER_GATEWAY_PORT:-8080}:8080"
+      - "${ZENROUTER_CONTROL_PORT:-8081}:8081"
+    volumes:
+      # 不留正文（backend=none）时该卷不会被写入。
+      - content-data:/var/lib/zenrouter/content
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8080/readyz', timeout=3).status == 200 else 1)"]
+      interval: 10s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
+    stop_grace_period: 45s
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
+  valkey-data:
+  content-data:

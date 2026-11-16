@@ -1,0 +1,23 @@
+# 本地开发配置：配合 `make dev`（依赖由 deploy/compose/compose.deps.yaml 提供）。
+# 数据库连接串由 Makefile 通过环境变量注入，避免写入版本库。
+
+[server]
+gateway_listen = "127.0.0.1:8080"
+control_listen = "127.0.0.1:8081"
+probe_listen = "127.0.0.1:8082"
+console_dir = "apps/console/dist"
+shutdown_grace_secs = 5
+
+[adapter]
+url = "http://127.0.0.1:8090"
+supervise = true
+command = ["uv", "run", "--project", "adapters/litellm", "zenrouter-adapter"]
+stop_timeout_secs = 5
+
+[content]
+backend = "file"
+dir = ".data/content"
+
+[log]
+format = "text"
+filter = "info,zenrouter=debug"

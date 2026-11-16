@@ -1,0 +1,22 @@
+[package]
+name = "zenrouter-gateway"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license.workspace = true
+
+[dependencies]
+zenrouter-application.workspace = true
+zenrouter-contracts.workspace = true
+zenrouter-domain-security.workspace = true
+axum.workspace = true
+serde_json.workspace = true
+tracing.workspace = true
+
+[lints]
+workspace = true
+
+[dev-dependencies]
+tokio.workspace = true
+tower.workspace = true

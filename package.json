@@ -1,0 +1,14 @@
+{
+  "name": "zenrouter",
+  "private": true,
+  "license": "MIT",
+  "packageManager": "pnpm@10.12.3",
+  "engines": {
+    "node": ">=22.22.0"
+  },
+  "scripts": {
+    "console:dev": "pnpm --filter @zenrouter/console dev",
+    "console:build": "pnpm --filter @zenrouter/console build",
+    "console:typecheck": "pnpm --filter @zenrouter/console typecheck"
+  }
+}

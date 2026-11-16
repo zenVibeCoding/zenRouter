@@ -1,0 +1,24 @@
+# 镜像内默认配置。数据库连接串通过 ZENROUTER__DATABASE__URL 注入。
+# 启用正文留存：ZENROUTER__CONTENT__BACKEND=file，并挂载 /var/lib/zenrouter/content。
+
+[server]
+gateway_listen = "0.0.0.0:8080"
+control_listen = "0.0.0.0:8081"
+probe_listen = "0.0.0.0:8082"
+console_dir = "/opt/zenrouter/console"
+shutdown_grace_secs = 30
+
+[adapter]
+# 单应用容器内 Adapter 只监听 loopback，不对外暴露端口。
+url = "http://127.0.0.1:8090"
+supervise = true
+command = ["zenrouter-adapter"]
+stop_timeout_secs = 10
+
+[content]
+backend = "none"
+dir = "/var/lib/zenrouter/content"
+
+[log]
+format = "json"
+filter = "info"

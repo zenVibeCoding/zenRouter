@@ -1,0 +1,41 @@
+[project]
+name = "zenrouter-adapter"
+version = "0.1.0"
+description = "ZenRouter 模型适配组件：封装 LiteLLM Core SDK，只执行 Gateway 已选定的一次上游尝试"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+    "fastapi>=0.163.1,<0.164",
+    "uvicorn>=0.54.0,<0.55",
+    # 只安装 Core 分发包，不与常规 litellm 包并存（二者包含重叠文件）。
+    "litellm-core==1.109.1",
+]
+
+[project.scripts]
+zenrouter-adapter = "zenrouter_adapter.__main__:main"
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=9.2.0",
+    "ruff>=0.17.5",
+]
+
+[build-system]
+requires = ["uv_build>=0.11.8,<0.12"]
+build-backend = "uv_build"
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "S"]
+ignore = ["S104"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -6,9 +6,46 @@
 
 ZenRouter 面向企业多团队的 AI 使用场景，统一接入模型服务，提供路由、成本与权限管理、内容安全分析、调用审计与企业可配置的正文留存能力。
 
-本仓库只保留前期阶段的需求、调研、原型与架构文档，不包含实现代码。所有文档均为设计输入和建议，不代表功能已经实现或通过验证。
+本仓库包含前期阶段的需求、调研、原型与架构文档，以及按[技术架构第 4.3 节](docs/technical-architecture.md)搭建的**项目骨架**。骨架只提供可运行的工程结构、运行角色、探针与部署入口，业务功能尚未实现；文档均为设计输入和建议，不代表功能已经实现或通过验证。
 
-## 阅读顺序
+## 项目骨架
+
+| 位置 | 内容 |
+| --- | --- |
+| `Cargo.toml`、`rust-toolchain.toml` | Rust 工作空间（Rust 1.97，edition 2024），依赖版本统一约束，`Cargo.lock` 锁定 |
+| `crates/domain-*` | identity、routing、security、billing 四个领域的模型与不变量 |
+| `crates/application` | 用例与跨域编排，定义存储／外部服务接口（当前：运行探针） |
+| `crates/gateway`、`control-api`、`worker` | 调用面（四类协议入口，暂返回 501）、管理面（`/api/v1`、控制台托管）、后台任务循环 |
+| `crates/storage`、`integrations`、`contracts` | PostgreSQL／正文目录、Python Adapter 连接、版本化传输类型 |
+| `crates/runtime` | `zenrouter` 可执行文件：配置加载、角色组合、Adapter 子进程监督、优雅退出 |
+| `adapters/litellm` | Python Adapter（uv、FastAPI、litellm-core），独立进程 |
+| `apps/console` | React 控制台（pnpm、Vite、Ant Design、TanStack Query），沿用原型信息结构与绿色主题 |
+| `api/openapi`、`migrations`、`config` | 接口规范、SQL 迁移、配置示例 |
+| `deploy` | 统一镜像 Dockerfile、Compose 默认安装与开发依赖，见 [deploy/README](deploy/README.md) |
+| `detectors`、`tests` | 检测器与跨组件验证的预留位置 |
+
+### 本地开发
+
+需要 Rust 1.97、Node.js ≥ 22.22 与 pnpm、uv、Docker（含 Compose）。
+
+~~~sh
+make setup        # 安装依赖
+make dev          # 启动开发 PostgreSQL → 迁移 → zenrouter serve --roles all（自动监督 Adapter）
+make console-dev  # 另开终端：控制台热更新 http://127.0.0.1:5173
+make check        # 格式、静态检查与全部测试
+make help         # 全部目标
+~~~
+
+| 端口 | 用途 |
+| --- | --- |
+| 8080 | 调用面：`/v1/chat/completions`、`/v1/responses`、`/v1/messages`、`/v1beta/models/*`，以及 `/livez`、`/readyz` |
+| 8081 | 管理面：`/api/v1/system/info`、控制台页面，以及 `/livez`、`/readyz` |
+| 8090 | Python Adapter（仅 loopback） |
+| 55442 | 开发 PostgreSQL（`DEV_PG_PORT` 可改） |
+
+运行角色：`zenrouter serve --roles all|gateway|control|worker`（可逗号组合），`zenrouter migrate`，`zenrouter check-config`。配置覆盖顺序为默认值 → `--config` 文件 → `ZENROUTER__段__键` 环境变量，详见[配置示例](config/zenrouter.example.toml)。
+
+## 文档阅读顺序
 
 1. [产品全景与范围基线（HTML）](docs/product-overview.html)：产品定位、四大模块、核心方向、建设边界与推进路线。
 2. [产品需求基线](docs/product-requirements.md)：已确认的需求方向、功能范围、建议分期、关键流程、验收场景和待决策事项。
@@ -17,6 +54,10 @@ ZenRouter 面向企业多团队的 AI 使用场景，统一接入模型服务，
 5. [初版交互原型（HTML）](docs/prototype.html) · [功能地图](docs/prototype.html#map) · [功能模块与原型说明](docs/prototype-plan.md)：18 个页面入口，演示应用接入、逐级额度、调用追溯与风险复核。
 6. [组织与权限需求原型（HTML）](docs/identity-prototype.html)：成员、部门、角色授权、项目应用、凭证、企业身份、账户会话与管理记录的专项原型。页面中的“已实现／待开发”等标记为 2026-11-05 的历史状态。
 7. [技术选型与总体架构（HTML）](docs/technical-architecture.html) · [Markdown](docs/technical-architecture.md) · [架构图](docs/technical-architecture.svg) · [部署方式图](docs/deployment-modes.svg)：默认技术组合、模块与运行边界、完整调用链、层级预算、可靠留痕、四类部署规划和验证门槛。
+
+## 开发计划
+
+- [开发顺序与任务优先级](docs/development-plan.md)：M0～M6 阶段、各阶段任务优先级、依赖关系与需要提前确定的决策。
 
 ## 调研资料
 
@@ -37,3 +78,7 @@ python3 scripts/render-research.py
 原型可直接用浏览器打开，无需安装依赖。[原型检查脚本](scripts/check-prototype.cjs)需要 Node.js、Playwright 和 Chromium。
 
 项目工作名为 **ZenRouter**；正式对外使用前仍需核查名称、域名与商标。
+
+## 许可证
+
+[MIT](LICENSE)。复用的第三方组件保留其各自的许可与声明。

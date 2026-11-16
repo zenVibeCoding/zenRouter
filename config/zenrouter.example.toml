@@ -1,0 +1,42 @@
+# ZenRouter 配置示例。
+#
+# 覆盖顺序：内置默认值 → 本文件（--config / ZENROUTER_CONFIG）→ 环境变量。
+# 环境变量格式为 ZENROUTER__<段>__<键>，例如 ZENROUTER__DATABASE__URL。
+# 秘密（数据库密码等）建议只通过环境变量或密钥文件注入，不写进版本库。
+# 未知键会被拒绝，避免拼写错误被静默忽略。
+
+[server]
+# 调用面：OpenAI / Anthropic / Gemini 兼容入口
+gateway_listen = "0.0.0.0:8080"
+# 管理面与控制台
+control_listen = "0.0.0.0:8081"
+# 只运行 worker 角色时的探针端口
+probe_listen = "0.0.0.0:8082"
+# 控制台构建产物目录；不存在时不托管页面
+console_dir = "apps/console/dist"
+# 收到退出信号后等待存量请求结束的最长秒数
+shutdown_grace_secs = 30
+
+[database]
+# url = "postgres://zenrouter:***@127.0.0.1:5432/zenrouter"
+max_connections = 10
+
+[adapter]
+# Python Adapter 只应监听 loopback 或受控内网
+url = "http://127.0.0.1:8090"
+# 由 zenrouter 启动并监督 Adapter 子进程（单应用容器、本地 all 角色）
+supervise = false
+# command = ["uv", "run", "--project", "adapters/litellm", "zenrouter-adapter"]
+stop_timeout_secs = 10
+
+[content]
+# none：不留正文，不启用正文存储链路，也不要求正文卷
+# file：企业指定目录（JSONL 写入；Parquet 封存后续加入）
+backend = "none"
+# dir = "/var/lib/zenrouter/content"
+
+[log]
+# text 或 json
+format = "text"
+# RUST_LOG 优先
+filter = "info"

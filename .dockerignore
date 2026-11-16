@@ -1,0 +1,16 @@
+# 构建上下文排除项：开发缓存、依赖目录、构建产物与本地数据不进入镜像。
+.git
+target
+**/node_modules
+apps/console/dist
+adapters/**/.venv
+**/__pycache__
+**/.pytest_cache
+**/.ruff_cache
+.data
+.pnpm-store
+docs
+*.md
+!adapters/litellm/README.md
+.env
+.env.*
